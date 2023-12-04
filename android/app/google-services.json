@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1006518198645",
+    "project_id": "barberdata-1869c",
+    "storage_bucket": "barberdata-1869c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006518198645:android:0885f794afa1fad012733c",
+        "android_client_info": {
+          "package_name": "com.base.barbearia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCleVhn2XaYQPYaluQATWDH8mKwTZWfvAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
