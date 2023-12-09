@@ -8,6 +8,7 @@ import 'package:projetos/functions/auth/login/screens/auth_ScreenLogin.dart';
 import 'package:projetos/functions/auth/register/screens/register_screen.dart';
 import 'package:projetos/screens/balanceScreen.dart';
 import 'package:projetos/screens/home_screen_WithMaps.dart';
+import 'package:projetos/screens/scheduleScreen.dart';
 import 'package:projetos/utils/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +44,7 @@ class AlmiranteApp extends StatelessWidget {
           AppRoutes.AuthScreenPrimary: (ctx) => const AuthScreenPrimary(),
           AppRoutes.RegisterScreen: (ctx) => const RegisterScreen(),
           AppRoutes.MyCurrentBalance: (ctx) => const MyCurrentBalance(),
+          AppRoutes.ScheduleScreen: (ctx)=>ScheduleScreen(),
         },
       ),
     );

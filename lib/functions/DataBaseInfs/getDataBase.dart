@@ -19,7 +19,7 @@ class GetDataBase with ChangeNotifier {
 
           userName = data['userName'];
         } else {
-          print('Nao obtive e adicionei nada ao username');
+          
         }
         return userName;
       });
@@ -39,7 +39,7 @@ class GetDataBase with ChangeNotifier {
 
           PhotoLink = data['urlPhotoLink'];
         } else {
-          print('Nao obtive e adicionei nada ao PhotoLink');
+        
         }
         return PhotoLink;
       });

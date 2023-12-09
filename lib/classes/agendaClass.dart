@@ -1,8 +1,9 @@
-import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class agendaItem {
   //atributos visuais
-  final String id;
+
   final String userName;
 
   //responsável
@@ -18,7 +19,6 @@ class agendaItem {
 
   agendaItem({
     required this.sobrancela,
-    required this.id,
     required this.userName,
     required this.Cabelereiro,
     required this.FirstComponentHour,
@@ -27,4 +27,7 @@ class agendaItem {
     required this.month,
     required this.year,
   });
+
+  // Construtor que preenche os campos da classe com os dados do documento
+
 }

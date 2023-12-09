@@ -3,6 +3,7 @@ import 'package:projetos/classes/profissionalClass.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/lists/ProfissionalList.dart';
 import 'package:projetos/screenComponents/home/profHomeWidget.dart';
+import 'package:projetos/utils/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
 class AgendarFunctionScreen extends StatefulWidget {
@@ -66,10 +67,18 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     return barbeiro!;
   }
 
+  bool boolSobrancelhas = false;
+  void SetSobrancelhas() {
+    setState(() {
+      boolSobrancelhas = true;
+    });
+  }
+
   void agendarFunciont() {
     final provider =
         Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
       username: userName.text,
+      sobrancelha: boolSobrancelhas,
       cabelereiro: selectBarber(),
       FirstComponentHour: hourView,
       SecondComponentHour: minutesView,
@@ -94,13 +103,6 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
       BarberSelectedLucas = true;
       BarberSelectedCleber = false;
       BarberSelectedPedro = false;
-    });
-  }
-
-  bool boolSobrancelhas = false;
-  void SetSobrancelhas() {
-    setState(() {
-      boolSobrancelhas = true;
     });
   }
 
@@ -210,7 +212,6 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                           child: InkWell(
                             onTap: () {
                               SetSobrancelhas();
-                              print('setei sobrancelhas');
                             },
                             child: Container(
                               alignment: Alignment.center,
@@ -589,7 +590,50 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                     height: 15,
                   ),
                   InkWell(
-                    onTap: agendarFunciont,
+                    onTap: () {
+                      agendarFunciont();
+
+                      showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          return AlertDialog(
+                            title: Text('Você Agendou seu Horario'),
+                            content: Text(
+                              'Você já pode verificar seu horario na tela de agenda!',
+                            ),
+                            actions: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Colors.green,
+                                  ),
+                                ),
+                                onPressed: () {
+                                    setState(() {
+                                    boolSobrancelhas = false;
+                                    userName.text = '';
+                                    BarberSelectedCleber = false;
+                                    BarberSelectedLucas = false;
+                                    BarberSelectedPedro = false;
+                                  });
+                                  Navigator.of(context).pop();
+
+                                
+                                },
+                                child: Text(
+                                  'Fechar',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     child: Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(

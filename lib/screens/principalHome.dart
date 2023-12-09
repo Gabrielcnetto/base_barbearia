@@ -99,9 +99,9 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                   ),
                 ),
               ),
-            ),
+             ),
             Container(
-              width: LarguraTela,
+               width: LarguraTela,
               height: alturaTela / 7.8,
               decoration: BoxDecoration(
                 color: Colors.white,

@@ -1,25 +1,23 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
 
 class AgendaProvider with ChangeNotifier {
-  DateTime hora = DateTime.now();
-  List<agendaItem> _agendaLista = [
-    agendaItem(
-      sobrancela: false,
-      Cabelereiro: 'Jorge',
-      FirstComponentHour: 12,
-      SecondComponentHour: 45,
-      day: 12,
-      id: Random().nextDouble().toString(),
-      month: 11,
-      userName: 'Gabriel Netto',
-      year: 2023,
-    ),
-  ];
-  List<agendaItem> get agendaLista => [..._agendaLista];
+  //INCIO => bibliotecas
+  final authSettings = FirebaseAuth.instance;
+  final storageSettings = FirebaseStorage.instance;
+  final dataBaseFirestore = FirebaseFirestore.instance;
+  //FIM => bibliotecas
 
+  DateTime hora = DateTime.now();
+  List<agendaItem> _agendaLista = [];
+  List<agendaItem> get agendaLista => [..._agendaLista];
+  List<agendaItem> _historyList = [];
+  List<agendaItem> get HistoryList => [..._historyList];
   Future<void> agendarCorte({
     required String username,
     required String cabelereiro,
@@ -32,9 +30,8 @@ class AgendaProvider with ChangeNotifier {
   }) async {
     _agendaLista.add(
       agendaItem(
-        id: Random().nextDouble().toString(),
         userName: username,
-        sobrancela: false,
+        sobrancela: sobrancelha!,
         Cabelereiro: cabelereiro,
         FirstComponentHour: FirstComponentHour,
         SecondComponentHour: SecondComponentHour,
@@ -43,6 +40,102 @@ class AgendaProvider with ChangeNotifier {
         year: year,
       ),
     );
+
+    await dataBaseFirestore
+        .collection("agenda")
+        .doc('dezembro')
+        .collection('${day}')
+        .add({
+      'username': username,
+      'cabelereiro': cabelereiro,
+      'FirstComponentHour': FirstComponentHour,
+      'SecondComponentHour': SecondComponentHour,
+      'day': day,
+      'month': month,
+      'year': year,
+      'sobrancelha': sobrancelha,
+    });
+    await dataBaseFirestore
+        .collection("meusCortes")
+        .doc(authSettings.currentUser!.uid)
+        .collection('lista')
+        .add(
+      {
+        'username': username,
+        'cabelereiro': cabelereiro,
+        'FirstComponentHour': FirstComponentHour,
+        'SecondComponentHour': SecondComponentHour,
+        'day': day,
+        'month': month,
+        'year': year,
+        'sobrancelha': sobrancelha,
+      },
+    );
+
     notifyListeners();
+  }
+
+  Future<void> loadHistoryCortes() async {
+    QuerySnapshot querySnapshot = await dataBaseFirestore
+        .collection('meusCortes/${authSettings.currentUser!.uid}/lista')
+        .get();
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    if (docs.isEmpty) {
+    } else {
+      _historyList.clear();
+      for (var doc in docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+        try {
+          List<DocumentSnapshot> docs = querySnapshot.docs;
+          _historyList.add(
+            agendaItem(
+              sobrancela: data['sobrancelha'],
+              userName: data['username'],
+              Cabelereiro: data['cabelereiro'],
+              FirstComponentHour: data['FirstComponentHour'],
+              SecondComponentHour: data['SecondComponentHour'],
+              day: data['day'],
+              month: data['month'],
+              year: data['year'],
+            ),
+          );
+        } catch (e) {
+          print('asdasd');
+        }
+      }
+    }
+  }
+
+  Future<void> loadListCortes(int day) async {
+    QuerySnapshot querySnapshot = await dataBaseFirestore
+        .collection("agenda")
+        .doc("dezembro")
+        .collection("${day}")
+        .get();
+
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+
+    if (docs.isEmpty) {
+    } else {
+      _agendaLista.clear();
+      for (var doc in docs) {
+        try {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          _agendaLista.add(
+            agendaItem(
+              sobrancela: data['sobrancelha'],
+              userName: data['username'],
+              Cabelereiro: data['cabelereiro'],
+              FirstComponentHour: data['FirstComponentHour'],
+              SecondComponentHour: data['SecondComponentHour'],
+              day: data['day'],
+              month: data['month'],
+              year: data['year'],
+            ),
+          );
+        } catch (e) {}
+      }
+    }
   }
 }

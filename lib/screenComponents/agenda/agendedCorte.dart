@@ -8,11 +8,11 @@ class AgendadoNaAgenda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, bottom: 20),
+      padding: const EdgeInsets.only(right: 15, left: 15, bottom: 20, ),
       child: Container(
         alignment: Alignment.topLeft,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height / 6.8,
+        height: MediaQuery.of(context).size.height / 5.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(15, 15),
@@ -89,6 +89,37 @@ class AgendadoNaAgenda extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: 10,),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.orangeAccent,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.check,
+                        size: 15,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                       item.sobrancela == true ? 'Cabelo e Sobrancelha' : 'Apenas Cabelo',
+                        style: TextStyle(
+                          color: Colors.grey.shade800,
+                          fontFamily: 'PoppinsNormal',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -97,7 +128,8 @@ class AgendadoNaAgenda extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -121,32 +153,6 @@ class AgendadoNaAgenda extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Itens Inclusos'),
-                  Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        height: 40,
-                        child: Image.network(
-                          'https://cdn-icons-png.flaticon.com/512/30/30452.png',
-                          fit: BoxFit.cover,
-                          width: 15,
-                          height: 15,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ],
         ),
