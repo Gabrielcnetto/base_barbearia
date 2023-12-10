@@ -61,8 +61,13 @@ class _StackForWidgetsState extends State<StackForWidgets> {
                 )
               : Column(
                   children: exibList.map((item) {
-                    return AgendadoNaAgenda(
-                      item: item,
+                    return InkWell(
+                      onTap: (){
+                        print(item.imageUser);
+                      },
+                      child: AgendadoNaAgenda(
+                        item: item,
+                      ),
                     );
                   }).toList(),
                 ),

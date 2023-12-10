@@ -17,7 +17,7 @@ class _MyHairCutScreenState extends State<MyHairCutScreen> {
     // TODO: implement initState
     super.initState();
     Provider.of<AgendaProvider>(context,listen: false).loadHistoryCortes();
-    print(Provider.of<AgendaProvider>(context,listen: false).HistoryList.length);
+    print('tamanho do historico: ${Provider.of<AgendaProvider>(context,listen: false).HistoryList.length}');
   }
   
  

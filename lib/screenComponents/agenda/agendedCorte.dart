@@ -8,7 +8,11 @@ class AgendadoNaAgenda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, bottom: 20, ),
+      padding: const EdgeInsets.only(
+        right: 15,
+        left: 15,
+        bottom: 20,
+      ),
       child: Container(
         alignment: Alignment.topLeft,
         width: double.infinity,
@@ -89,14 +93,15 @@ class AgendadoNaAgenda extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.orangeAccent,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -109,7 +114,9 @@ class AgendadoNaAgenda extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                       item.sobrancela == true ? 'Cabelo e Sobrancelha' : 'Apenas Cabelo',
+                        item.sobrancela == true
+                            ? 'Cabelo e Sobrancelha'
+                            : 'Apenas Cabelo',
                         style: TextStyle(
                           color: Colors.grey.shade800,
                           fontFamily: 'PoppinsNormal',
@@ -128,8 +135,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -153,6 +159,19 @@ class AgendadoNaAgenda extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Container(
+                width: 80,
+                height: 80,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    item.imageUser
+                  ),
+                ),
+              ),
             ),
           ],
         ),

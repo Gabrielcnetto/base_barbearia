@@ -133,7 +133,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                                   ),
                                 ),
                                 Text(
-                                  'Barbearia Almirante',
+                                  'Barbearia Padrão',
                                   style: TextStyle(
                                     fontFamily: 'PoppinsNormal',
                                     fontSize: 16,

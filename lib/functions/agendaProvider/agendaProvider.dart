@@ -25,11 +25,13 @@ class AgendaProvider with ChangeNotifier {
     required int SecondComponentHour,
     required int day,
     required int month,
+    required String imageUser,
     required int year,
     bool? sobrancelha,
   }) async {
     _agendaLista.add(
       agendaItem(
+        imageUser: imageUser,
         userName: username,
         sobrancela: sobrancelha!,
         Cabelereiro: cabelereiro,
@@ -46,6 +48,7 @@ class AgendaProvider with ChangeNotifier {
         .doc('dezembro')
         .collection('${day}')
         .add({
+      'imageProfileUser': imageUser,
       'username': username,
       'cabelereiro': cabelereiro,
       'FirstComponentHour': FirstComponentHour,
@@ -81,7 +84,9 @@ class AgendaProvider with ChangeNotifier {
         .get();
     List<DocumentSnapshot> docs = querySnapshot.docs;
     if (docs.isEmpty) {
+      print('lista de historico vazia');
     } else {
+      print('tem itens');
       _historyList.clear();
       for (var doc in docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
@@ -90,6 +95,7 @@ class AgendaProvider with ChangeNotifier {
           List<DocumentSnapshot> docs = querySnapshot.docs;
           _historyList.add(
             agendaItem(
+              imageUser: '',
               sobrancela: data['sobrancelha'],
               userName: data['username'],
               Cabelereiro: data['cabelereiro'],
@@ -101,7 +107,7 @@ class AgendaProvider with ChangeNotifier {
             ),
           );
         } catch (e) {
-          print('asdasd');
+          print('algum erro');
         }
       }
     }
@@ -124,6 +130,7 @@ class AgendaProvider with ChangeNotifier {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           _agendaLista.add(
             agendaItem(
+              imageUser: data['imageProfileUser'],
               sobrancela: data['sobrancelha'],
               userName: data['username'],
               Cabelereiro: data['cabelereiro'],

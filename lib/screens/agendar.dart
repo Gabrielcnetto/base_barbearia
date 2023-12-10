@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/profissionalClass.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/lists/ProfissionalList.dart';
 import 'package:projetos/screenComponents/home/profHomeWidget.dart';
 import 'package:projetos/utils/AppRoutes.dart';
@@ -15,6 +18,16 @@ class AgendarFunctionScreen extends StatefulWidget {
 
 class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
   final userName = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    LoadUrlImageUserdb();
+    
+    Provider.of<CreateUserProvider>(context, listen: false).getImageUser();
+    print('foto passada: ${userUrlImagePhotoLink}');
+  }
+
   int dayView = 1;
   int MonthView = 1;
   int hourView = 12;
@@ -74,10 +87,20 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     });
   }
 
+  String? userUrlImagePhotoLink;
+  Future<void> LoadUrlImageUserdb() async {
+    String? descUser = await CreateUserProvider().getImageUser();
+  
+    setState(() {
+      userUrlImagePhotoLink = descUser;
+    });
+  }
+
   void agendarFunciont() {
     final provider =
         Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
       username: userName.text,
+      imageUser: userUrlImagePhotoLink ?? '',
       sobrancelha: boolSobrancelhas,
       cabelereiro: selectBarber(),
       FirstComponentHour: hourView,
@@ -94,6 +117,8 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
       BarberSelectedCleber = true;
       BarberSelectedLucas = false;
       BarberSelectedPedro = false;
+      LoadUrlImageUserdb();
+      print('barbeiro: ${userUrlImagePhotoLink}');
     });
   }
 
@@ -103,6 +128,8 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
       BarberSelectedLucas = true;
       BarberSelectedCleber = false;
       BarberSelectedPedro = false;
+        LoadUrlImageUserdb();
+      print('barbeiro: ${userUrlImagePhotoLink}');
     });
   }
 
@@ -117,6 +144,8 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     setState(() {
       BarberSelectedPedro = true;
       BarberSelectedCleber = false;
+        LoadUrlImageUserdb();
+      print('barbeiro: ${userUrlImagePhotoLink}');
       BarberSelectedLucas = false;
     });
   }
@@ -609,7 +638,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                    setState(() {
+                                  setState(() {
                                     boolSobrancelhas = false;
                                     userName.text = '';
                                     BarberSelectedCleber = false;
@@ -617,8 +646,6 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                     BarberSelectedPedro = false;
                                   });
                                   Navigator.of(context).pop();
-
-                                
                                 },
                                 child: Text(
                                   'Fechar',

@@ -15,11 +15,13 @@ class agendaItem {
   final int SecondComponentHour;
   final int day;
   final int month;
+  final String imageUser;
   final int year;
 
   agendaItem({
     required this.sobrancela,
     required this.userName,
+    required this.imageUser,
     required this.Cabelereiro,
     required this.FirstComponentHour,
     required this.SecondComponentHour,

@@ -50,4 +50,25 @@ class CreateUserProvider with ChangeNotifier {
     authSettings.signInWithEmailAndPassword(email: email, password: password);
     notifyListeners();
   }
+
+  Future<String?> getImageUser() async {
+    if (authSettings.currentUser != null) {
+      String? urlImage;
+      await dataBaseFirestore
+          .collection("usuarios")
+          .doc(authSettings.currentUser!.uid)
+          .get()
+          .then((getData) {
+        if (getData.exists) {
+         print('foto ${getData.data()?["urlPhotoLink"]}');
+
+          urlImage = getData.data()?["urlPhotoLink"];
+        } else {
+         
+        }
+      });
+      return urlImage;
+    }
+    return null;
+  }
 }
