@@ -1,38 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:projetos/classes/agendaClass.dart';
+import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:projetos/functions/auth/functions/createUser.dart';
+import 'package:provider/provider.dart';
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
 
   @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<CreateUserProvider>(context, listen: false).getNameUser();
+    LoadUrlImageUserdb();
+  }
+
+  String? userName;
+  Future<void> LoadUrlImageUserdb() async {
+    String? descUser = await CreateUserProvider().getNameUser();
+
+    setState(() {
+      userName = descUser;
+    });
+  }
+
+  final newName = TextEditingController();
+  @override
   Widget build(BuildContext context) {
+    List<agendaItem> listaMyCortes =
+        Provider.of<AgendaProvider>(context, listen: false).HistoryList;
+    int tamanhoLista = listaMyCortes.length;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(
-          top: 10,
+          top: 30,
           right: 15,
           left: 15,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Gabriel Netto',
-                  style: TextStyle(
-                    fontFamily: 'PoppinsNormal',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Colors.grey.shade800.withOpacity(1),
-                  ),
-                ),
-                Icon(
-                  Icons.expand_more,
-                  color: Colors.grey.shade300,
-                ),
-              ],
-            ),
             Text(
               'Meu Perfil',
               style: TextStyle(
@@ -71,7 +83,7 @@ class MyProfileScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 1.7,
                     height: MediaQuery.of(context).size.height / 5,
-                    child: const Row(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -89,7 +101,7 @@ class MyProfileScreen extends StatelessWidget {
                                     fontSize: 14),
                               ),
                               Text(
-                                '2',
+                                '${tamanhoLista}p',
                                 style: TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
@@ -113,7 +125,7 @@ class MyProfileScreen extends StatelessWidget {
                                     fontSize: 14),
                               ),
                               Text(
-                                '2',
+                                '${tamanhoLista}',
                                 style: TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
@@ -136,14 +148,33 @@ class MyProfileScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14),
                               ),
-                              Text(
-                                'Iniciante',
-                                style: TextStyle(
-                                  fontFamily: 'PoppinsNormal',
-                                  fontSize: 13,
-                                  color: Colors.grey,
+                              if (tamanhoLista <= 5)
+                                Text(
+                                  'Inicinte',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
+                              if (tamanhoLista > 5 && tamanhoLista <= 8)
+                                Text(
+                                  'Amador',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              if (tamanhoLista > 8)
+                                Text(
+                                  'Vip',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -154,12 +185,15 @@ class MyProfileScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Gabriel Netto',
+              userName ?? '',
               style: TextStyle(
                 fontFamily: 'PoppinsTitle',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Row(
               children: [
@@ -181,11 +215,74 @@ class MyProfileScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.network(
-                                     ' VOLTAR AQUI',
-                                      fit: BoxFit.cover,
+                                    Text(
+                                      'Atualize seu Nome de Usuário:',
+                                      style: TextStyle(
+                                        fontFamily: 'PoppinsTitle',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
                                     ),
-                                    Text('Atualizar Nome:'),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 5, horizontal: 10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.grey.shade900
+                                                .withOpacity(0.6),
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: TextFormField(
+                                        controller: newName,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          label: Text(
+                                            'Digite seu Nome',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Provider.of<CreateUserProvider>(context,
+                                                listen: false)
+                                            .attProfile(newName.text);
+                                        Navigator.of(context).pop();
+                                        print('adasd');
+                                      },
+                                      child: Card(
+                                        elevation: 5,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          decoration: BoxDecoration(
+                                              color: Colors.green,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          height: 40,
+                                          width: double.infinity,
+                                          child: Text(
+                                            'ATUALIZAR',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'PoppinsNormal',
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
                                   ],
                                 ),
                               );
@@ -198,7 +295,7 @@ class MyProfileScreen extends StatelessWidget {
                             color: Colors.grey.shade800,
                             borderRadius: BorderRadius.circular(5)),
                         child: Text(
-                          'Editar Perfil',
+                          'Alterar Nome',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'PoppinsNormal',
@@ -212,18 +309,24 @@ class MyProfileScreen extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Container(
-                      height: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Text(
-                        'Compartilhar Perfil',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'PoppinsNormal',
-                          fontWeight: FontWeight.bold,
+                    child: InkWell(
+                      onTap: () {
+                        Provider.of<CreateUserProvider>(context, listen: false)
+                            .logoutUser();
+                      },
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text(
+                          'Sair da Conta',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'PoppinsNormal',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

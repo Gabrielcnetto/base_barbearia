@@ -15,6 +15,7 @@ class AgendaProvider with ChangeNotifier {
 
   DateTime hora = DateTime.now();
   List<agendaItem> _agendaLista = [];
+
   List<agendaItem> get agendaLista => [..._agendaLista];
   List<agendaItem> _historyList = [];
   List<agendaItem> get HistoryList => [..._historyList];
@@ -86,7 +87,6 @@ class AgendaProvider with ChangeNotifier {
     if (docs.isEmpty) {
       print('lista de historico vazia');
     } else {
-      print('tem itens');
       _historyList.clear();
       for (var doc in docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
@@ -114,17 +114,18 @@ class AgendaProvider with ChangeNotifier {
   }
 
   Future<void> loadListCortes(int day) async {
+    int diaSelecionado = await day;
     QuerySnapshot querySnapshot = await dataBaseFirestore
         .collection("agenda")
         .doc("dezembro")
-        .collection("${day}")
+        .collection("${diaSelecionado}")
         .get();
 
     List<DocumentSnapshot> docs = querySnapshot.docs;
+    _agendaLista.clear();
 
     if (docs.isEmpty) {
     } else {
-      _agendaLista.clear();
       for (var doc in docs) {
         try {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
