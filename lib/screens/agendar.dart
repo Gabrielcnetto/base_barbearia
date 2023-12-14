@@ -175,47 +175,45 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
             //SEU NOME -> INCIO
             Container(
               width: double.infinity,
-            
+              height: telaTamaho / 1.19,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //nome
                   Container(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Seu Nome',
-                            style: TextStyle(
-                              fontFamily: 'PoppinsNormal',
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Seu Nome',
+                          style: TextStyle(
+                            fontFamily: 'PoppinsNormal',
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              width: 1,
+                              color: Colors.grey.shade900,
                             ),
                           ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 1,
-                                color: Colors.grey.shade900,
-                              ),
-                            ),
-                            width: double.infinity,
-                            child: TextFormField(
-                              controller: userName,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
+                          width: double.infinity,
+                          child: TextFormField(
+                            controller: userName,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(
