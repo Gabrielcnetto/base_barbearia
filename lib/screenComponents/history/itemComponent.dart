@@ -84,7 +84,7 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
                             ),
                           ),
                           SizedBox(height: 5,),
-                          Text('+Pontos', style: TextStyle(fontFamily: 'PoppinsTitle', fontWeight: FontWeight.bold),)
+                          Text('+1 Ponto', style: TextStyle(fontFamily: 'PoppinsTitle', fontWeight: FontWeight.bold),)
                         ],
                       ),
                     )

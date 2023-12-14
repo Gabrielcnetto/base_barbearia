@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
-import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 
 import 'package:projetos/screenComponents/home/percentDescont.dart';
 import 'package:projetos/screenComponents/home/profHomeWidget.dart';
+import 'package:projetos/utils/AppRoutes.dart';
 
 import 'package:provider/provider.dart';
 
@@ -22,9 +22,6 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
     Provider.of<GetDataBase>(context, listen: false).getUserName();
     loadUserName();
     loaduserProfileImage();
-       Provider.of<AgendaProvider>(
-      context,listen: false
-    ).HistoryList;
   }
 
   String? userName;
@@ -148,7 +145,31 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                          
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushNamed(
+                                            AppRoutes.MyCurrentBalance,
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.account_balance_wallet,
+                                          size: 15,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 SizedBox(
                                   width: 5,
                                 ),

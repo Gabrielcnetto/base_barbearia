@@ -60,42 +60,15 @@ class CreateUserProvider with ChangeNotifier {
           .get()
           .then((getData) {
         if (getData.exists) {
-          print('foto ${getData.data()?["urlPhotoLink"]}');
+         print('foto ${getData.data()?["urlPhotoLink"]}');
 
           urlImage = getData.data()?["urlPhotoLink"];
-        } else {}
+        } else {
+         
+        }
       });
       return urlImage;
     }
     return null;
-  }
-
-  Future<String?> getNameUser() async {
-    if (authSettings.currentUser != null) {
-      String? urlImage;
-      await dataBaseFirestore
-          .collection("usuarios")
-          .doc(authSettings.currentUser!.uid)
-          .get()
-          .then((getData) {
-        if (getData.exists) {
-          urlImage = getData.data()?["userName"];
-        } else {}
-      });
-      return urlImage;
-    }
-    return null;
-  }
-
-  Future<void> attProfile(String NewUserName) async {
-    final userRef = dataBaseFirestore
-        .collection("usuarios")
-        .doc(authSettings.currentUser!.uid);
-    userRef.get().then((getData) async {
-      if (getData.exists) {
-        await userRef.update({'userName': NewUserName});
-      }
-      notifyListeners();
-    });
   }
 }

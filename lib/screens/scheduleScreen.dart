@@ -20,7 +20,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       int DayMonth = int.parse(DateFormat('d').format(date));
       lastSevenDays.add(DayMonth);
     }
-
     lastSevenDays = lastSevenDays.toList();
   }
 
@@ -30,12 +29,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     // TODO: implement initState
     super.initState();
     setDays();
-    selectedDay = lastSevenDays[0];
-    print('NUMERO QUE VEM PRÉSELECIONADO: ${lastSevenDays[0]}');
-    Provider.of<AgendaProvider>(context, listen: false)
-        .loadListCortes(selectedDay);
-
     lastSevenDays;
+    if (lastSevenDays.isNotEmpty) {
+      selectedDay = lastSevenDays[0];
+      Provider.of<AgendaProvider>(context, listen: false)
+          .loadListCortes(selectedDay);
+    }
   }
 
   int selectedDay = 0;
@@ -123,17 +122,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             children: lastSevenDays.map((day) {
                               return Expanded(
                                 child: Padding(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                       left: 2, right: 2, top: 5, bottom: 5),
                                   child: InkWell(
                                     onTap: () {
-                                      Provider.of<AgendaProvider>(context,
-                                              listen: false)
-                                          .loadListCortes(day)
-                                          .then((_) {
-                                        setState(() {
-                                          selectedDay = day;
-                                        });
+                                      setState(() {
+                                        selectedDay = day;
+                                        Provider.of<AgendaProvider>(context,
+                                                listen: false)
+                                            .loadListCortes(selectedDay);
+                                  
+                                  
                                       });
                                     },
                                     child: Container(
