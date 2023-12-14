@@ -147,27 +147,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                               children: [
                                 Column(
                                   children: [
-                                    Container(
-                                      width: 30,
-                                      height: 30,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pushNamed(
-                                            AppRoutes.MyCurrentBalance,
-                                          );
-                                        },
-                                        icon: Icon(
-                                          Icons.account_balance_wallet,
-                                          size: 15,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
+                   
                                   ],
                                 ),
                                 SizedBox(

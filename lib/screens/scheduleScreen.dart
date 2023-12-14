@@ -39,8 +39,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   int selectedDay = 0;
   bool simounao = false;
+
   @override
   Widget build(BuildContext context) {
+    double tamanho = MediaQuery.of(context).size.height / 4;
     final lista =
         Provider.of<AgendaProvider>(context, listen: false).agendaLista;
     return SafeArea(
@@ -49,8 +51,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           SizedBox(
             height: 15,
           ),
-          StackForWidgets(
-            selectedDay: selectedDay,
+          Container(
+            padding: EdgeInsets.only(top: tamanho),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height / 1,
+            child: StackForWidgets(
+              selectedDay: selectedDay,
+            ),
           ),
           Positioned(
             top: 0,
@@ -126,13 +133,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                       left: 2, right: 2, top: 5, bottom: 5),
                                   child: InkWell(
                                     onTap: () {
-                                      setState(() {
-                                        selectedDay = day;
-                                        Provider.of<AgendaProvider>(context,
-                                                listen: false)
-                                            .loadListCortes(selectedDay);
-                                  
-                                  
+                                      Provider.of<AgendaProvider>(context,
+                                              listen: false)
+                                          .loadListCortes(day)
+                                          .then((_) {
+                                        setState(() {
+                                          selectedDay = day;
+                                        });
                                       });
                                     },
                                     child: Container(

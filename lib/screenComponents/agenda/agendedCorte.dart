@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
 
-class AgendadoNaAgenda extends StatelessWidget {
+class AgendadoNaAgenda extends StatefulWidget {
   final agendaItem item;
   const AgendadoNaAgenda({super.key, required this.item});
 
+  @override
+  State<AgendadoNaAgenda> createState() => _AgendadoNaAgendaState();
+}
+
+class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('print do item: ${widget.item.Cabelereiro}');
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +44,7 @@ class AgendadoNaAgenda extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.userName,
+                  widget.item.userName,
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'PoppinsTitle',
@@ -57,7 +68,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          '${item.FirstComponentHour}:${item.SecondComponentHour}',
+                          '${widget.item.FirstComponentHour}:${widget.item.SecondComponentHour}',
                           style: TextStyle(
                             fontFamily: 'PoppinsNormal',
                             color: Colors.white,
@@ -81,7 +92,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          '${item.day}/${item.month}/${item.year}',
+                          '${widget.item.day}/${widget.item.month}/${widget.item.year}',
                           style: TextStyle(
                             fontFamily: 'PoppinsNormal',
                             color: Colors.white,
@@ -114,7 +125,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        item.sobrancela == true
+                        widget.item.sobrancela == true
                             ? 'Cabelo e Sobrancelha'
                             : 'Apenas Cabelo',
                         style: TextStyle(
@@ -148,7 +159,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                         width: 4,
                       ),
                       Text(
-                        item.Cabelereiro,
+                        widget.item.Cabelereiro,
                         style: TextStyle(
                           color: Colors.grey.shade800,
                           fontFamily: 'PoppinsNormal',
@@ -168,7 +179,7 @@ class AgendadoNaAgenda extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Image.network(
-                    item.imageUser
+                    widget.item.imageUser
                   ),
                 ),
               ),
