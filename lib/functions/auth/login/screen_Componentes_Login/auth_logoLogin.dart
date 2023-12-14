@@ -14,7 +14,7 @@ class AuthLogo extends StatelessWidget {
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width / 1.5,
-            height: MediaQuery.of(context).size.height / 3.3,
+            height: MediaQuery.of(context).size.height / 3.2,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -30,7 +30,6 @@ class _FormsUserRegisterState extends State<FormsUserRegister> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       width: double.infinity,
       height: MediaQuery.of(context).size.height / 1.6,
       child: Column(

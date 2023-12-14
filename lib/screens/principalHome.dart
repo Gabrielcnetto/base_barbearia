@@ -105,7 +105,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
              ),
             Container(
                width: LarguraTela,
-              height: alturaTela / 7.8,
+              height: alturaTela / 7.1,
               decoration: BoxDecoration(
                 color: Colors.white,
               ),

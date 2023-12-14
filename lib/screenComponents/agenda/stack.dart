@@ -49,49 +49,46 @@ class _StackForWidgetsState extends State<StackForWidgets> {
     ).agendaLista;
     List<agendaItem> exibList =
         listaSched.where((item) => item.day == widget.selectedDay).toList();
-
-    return Padding(
-      padding: const EdgeInsets.only(top: 210),
-      child: Container(
-        alignment:
-            exibList.length == 0 ? Alignment.center : Alignment.topCenter,
-        width: double.infinity,
-        height: tamanhoTela,
-        child: SingleChildScrollView(
-          child: exibList.length == 0
-              ? Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Selecione um dia',
-                        style: TextStyle(
-                          fontFamily: 'PoppinsTitle',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
+ 
+    return Container(
+      alignment:
+          exibList.length == 0 ? Alignment.center : Alignment.topCenter,
+      width: double.infinity,
+      height: tamanhoTela,
+      child: SingleChildScrollView(
+        child: exibList.length == 0
+            ? Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Selecione um dia',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 18,
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 120,
-                        height: 120,
-                        child: Image.network(
-                          'https://img.freepik.com/fotos-premium/personagem-de-desenho-animado-de-um-homem_688921-4693.jpg?w=360',
-                          fit: BoxFit.cover,
-                        ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      width: 120,
+                      height: 120,
+                      child: Image.network(
+                        'https://img.freepik.com/fotos-premium/personagem-de-desenho-animado-de-um-homem_688921-4693.jpg?w=360',
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
-                )
-              : Column(
-                  children: exibList.map((item) {
-                    return AgendadoNaAgenda(
-                      item: item,
-                    );
-                  }).toList(),
+                    ),
+                  ],
                 ),
-        ),
+              )
+            : Column(
+                children: exibList.map((item) {
+                  return AgendadoNaAgenda(
+                    item: item,
+                  );
+                }).toList(),
+              ),
       ),
     );
   }

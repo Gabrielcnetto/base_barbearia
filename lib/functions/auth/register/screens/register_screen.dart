@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+          padding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 1,
@@ -94,107 +94,109 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                   ),
-                  Column(
-                    children: [
-                      Container(
-                        width: 120,
-                        height: 120,
-                        child: image != null
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(80),
-                                child: Image.file(
-                                  File(image!.path),
-                                  fit: BoxFit.cover,
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 120,
+                          height: 120,
+                          child: image != null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(80),
+                                  child: Image.file(
+                                    File(image!.path),
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : Image.network(
+                                  defaultAvatar,
                                 ),
-                              )
-                            : Image.network(
-                                defaultAvatar,
-                              ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      //pegar galeria
-                      InkWell(
-                        onTap: getProfileImageBiblio,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  color: Colors.orange,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: const Row(
-                                children: [
-                                  Icon(
-                                    Icons.perm_media,
-                                    size: 20,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    'Galeria ',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'PoppinsNormal',
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            //pegar galeria
-                            //pegar Camera
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(
-                                  5,
-                                ),
-                              ),
-                              child: InkWell(
-                                onTap: getProfileImageCamera,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        //pegar galeria
+                        InkWell(
+                          onTap: getProfileImageBiblio,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                    color: Colors.orange,
+                                    borderRadius: BorderRadius.circular(5)),
                                 child: const Row(
                                   children: [
+                                    Icon(
+                                      Icons.perm_media,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
                                     Text(
-                                      ' Câmera',
+                                      'Galeria ',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'PoppinsNormal',
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Icon(
-                                      Icons.camera,
-                                      size: 20,
-                                      color: Colors.white,
-                                    ),
                                   ],
                                 ),
                               ),
-                            ),
-                            //pegar Camera
-                          ],
+                              //pegar galeria
+                              //pegar Camera
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(
+                                    5,
+                                  ),
+                                ),
+                                child: InkWell(
+                                  onTap: getProfileImageCamera,
+                                  child: const Row(
+                                    children: [
+                                      Text(
+                                        ' Câmera',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'PoppinsNormal',
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.camera,
+                                        size: 20,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              //pegar Camera
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      FormsUserRegister(
-                        onRegister: CreateUser,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        FormsUserRegister(
+                          onRegister: CreateUser,
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
