@@ -71,4 +71,33 @@ class CreateUserProvider with ChangeNotifier {
     }
     return null;
   }
+  Future<String?> getNameUser() async {
+    if (authSettings.currentUser != null) {
+      String? urlImage;
+      await dataBaseFirestore
+          .collection("usuarios")
+          .doc(authSettings.currentUser!.uid)
+          .get()
+          .then((getData) {
+        if (getData.exists) {
+          urlImage = getData.data()?["userName"];
+        } else {}
+      });
+      return urlImage;
+    }
+    return null;
+  }
+
+  Future<void> attProfile(String NewUserName) async {
+    final userRef = dataBaseFirestore
+        .collection("usuarios")
+        .doc(authSettings.currentUser!.uid);
+    userRef.get().then((getData) async {
+      if (getData.exists) {
+        await userRef.update({'userName': NewUserName});
+      }
+      notifyListeners();
+    });
+  }
+
 }

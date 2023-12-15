@@ -1,10 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/screens/MyHairCutsScreen.dart';
 import 'package:projetos/screens/MyProfileScreen.dart';
 import 'package:projetos/screens/agendar.dart';
 import 'package:projetos/screens/principalHome.dart';
 import 'package:projetos/screens/scheduleScreen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -44,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       screen = index;
     });
+    Provider.of<AgendaProvider>(context, listen: false).loadHistoryCortes();
   }
 
   @override

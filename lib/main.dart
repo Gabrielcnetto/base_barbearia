@@ -42,7 +42,7 @@ class AlmiranteApp extends StatelessWidget {
           AppRoutes.HomeScreen: (ctx) => const HomeScreen(),
           AppRoutes.AuthScreenPrimary: (ctx) => const AuthScreenPrimary(),
           AppRoutes.RegisterScreen: (ctx) => const RegisterScreen(),
-          AppRoutes.ScheduleScreen: (ctx)=>ScheduleScreen(),
+          AppRoutes.ScheduleScreen: (ctx)=>const ScheduleScreen(),
         },
       ),
     );

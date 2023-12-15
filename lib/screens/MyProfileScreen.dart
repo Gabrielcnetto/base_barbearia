@@ -1,10 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:projetos/classes/agendaClass.dart';
+import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:projetos/functions/auth/functions/createUser.dart';
+import 'package:provider/provider.dart';
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
 
   @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    LoadUrlImageUserdb();
+    userName;
+  }
+
+  final newName = TextEditingController();
+
+  String? userName;
+  Future<void> LoadUrlImageUserdb() async {
+    String? descUser = await CreateUserProvider().getNameUser();
+
+    setState(() {
+      userName = descUser;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    List<agendaItem> listaMyCortes =
+        Provider.of<AgendaProvider>(context, listen: false).HistoryList;
+    final int tamanhoLista = listaMyCortes.length;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(
@@ -15,23 +46,8 @@ class MyProfileScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Gabriel Netto',
-                  style: TextStyle(
-                    fontFamily: 'PoppinsNormal',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Colors.grey.shade800.withOpacity(1),
-                  ),
-                ),
-                Icon(
-                  Icons.expand_more,
-                  color: Colors.grey.shade300,
-                ),
-              ],
+            SizedBox(
+              height: 20,
             ),
             Text(
               'Meu Perfil',
@@ -71,7 +87,7 @@ class MyProfileScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width / 1.7,
                     height: MediaQuery.of(context).size.height / 5,
-                    child: const Row(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -89,7 +105,7 @@ class MyProfileScreen extends StatelessWidget {
                                     fontSize: 14),
                               ),
                               Text(
-                                '2',
+                                '${tamanhoLista}p',
                                 style: TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
@@ -113,7 +129,7 @@ class MyProfileScreen extends StatelessWidget {
                                     fontSize: 14),
                               ),
                               Text(
-                                '2',
+                                '${tamanhoLista}',
                                 style: TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
@@ -136,14 +152,33 @@ class MyProfileScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14),
                               ),
-                              Text(
-                                'Iniciante',
-                                style: TextStyle(
-                                  fontFamily: 'PoppinsNormal',
-                                  fontSize: 13,
-                                  color: Colors.grey,
+                              if (tamanhoLista <= 5)
+                                Text(
+                                  'Iniciante',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
                                 ),
-                              ),
+                              if (tamanhoLista > 5 && tamanhoLista < 8)
+                                Text(
+                                  'Secundário',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              if (tamanhoLista >= 9)
+                                Text(
+                                  'Vip',
+                                  style: TextStyle(
+                                    fontFamily: 'PoppinsNormal',
+                                    fontSize: 13,
+                                    color: Colors.grey,
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -154,12 +189,15 @@ class MyProfileScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Gabriel Netto',
+              userName ?? 'Null',
               style: TextStyle(
                 fontFamily: 'PoppinsTitle',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
+            ),
+            SizedBox(
+              height: 15,
             ),
             Row(
               children: [
@@ -181,11 +219,87 @@ class MyProfileScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Image.network(
-                                     ' VOLTAR AQUI',
-                                      fit: BoxFit.cover,
+                                    Text(
+                                      'Atualize seu Nome',
+                                      style: TextStyle(
+                                        fontFamily: 'PoppinsTitle',
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    Text('Atualizar Nome:'),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5, vertical: 10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.elliptical(10, 10),
+                                          bottomRight:
+                                              Radius.elliptical(10, 10),
+                                          topLeft: Radius.elliptical(10, 10),
+                                          topRight: Radius.elliptical(10, 10),
+                                        ),
+                                        border: Border.all(
+                                          width: 0.5,
+                                          color: Colors.grey.shade900,
+                                        ),
+                                      ),
+                                      width: double.infinity,
+                                      child: TextFormField(
+                                        controller: newName,
+                                        decoration: InputDecoration(
+                                          border: InputBorder.none,
+                                          label: Text(
+                                            'Digite...',
+                                            style: TextStyle(
+                                              fontFamily: 'PoppinsNormal',
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey.shade900
+                                                  .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Provider.of<CreateUserProvider>(context,
+                                                listen: false)
+                                            .attProfile(
+                                          newName.text,
+                                        );
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: double.infinity,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.elliptical(5, 5),
+                                            bottomRight:
+                                                Radius.elliptical(5, 5),
+                                            topLeft: Radius.elliptical(5, 5),
+                                            topRight: Radius.elliptical(5, 5),
+                                          ),
+                                          color: Colors.green,
+                                        ),
+                                        child: Text(
+                                          'Atualizar Nome',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'PoppinsTitle',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               );
@@ -212,18 +326,24 @@ class MyProfileScreen extends StatelessWidget {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Container(
-                      height: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          borderRadius: BorderRadius.circular(5)),
-                      child: Text(
-                        'Compartilhar Perfil',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'PoppinsNormal',
-                          fontWeight: FontWeight.bold,
+                    child: InkWell(
+                      onTap: () {
+                        Provider.of<CreateUserProvider>(context, listen: false)
+                            .logoutUser();
+                      },
+                      child: Container(
+                        height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade800,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text(
+                          'Sair da Conta',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'PoppinsNormal',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

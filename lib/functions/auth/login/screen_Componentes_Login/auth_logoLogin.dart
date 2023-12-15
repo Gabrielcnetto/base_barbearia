@@ -20,7 +20,7 @@ class AuthLogo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  'Barbearia do Almirante',
+                  'Barbearia Padrão',
                   style: TextStyle(
                     fontSize: 30,
                     fontFamily: 'PoppinsTitle',

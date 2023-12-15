@@ -70,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+          padding: const EdgeInsets.only( left: 15, right: 15),
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 1,
