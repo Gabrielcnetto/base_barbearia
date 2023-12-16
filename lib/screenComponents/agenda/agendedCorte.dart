@@ -27,7 +27,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
       child: Container(
         alignment: Alignment.topLeft,
         width: double.infinity,
-        height: MediaQuery.of(context).size.height / 5.5,
+        height: MediaQuery.of(context).size.height / 5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(15, 15),

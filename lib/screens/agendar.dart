@@ -175,521 +175,523 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
             //SEU NOME -> INCIO
             Container(
               width: double.infinity,
-              height: telaTamaho / 1.19,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //nome
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Seu Nome',
-                          style: TextStyle(
-                            fontFamily: 'PoppinsNormal',
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.grey.shade900,
+              height: telaTamaho / 1.08,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //nome
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Seu Nome',
+                            style: TextStyle(
+                              fontFamily: 'PoppinsNormal',
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: userName,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                            ),
+                          SizedBox(
+                            height: 4,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  //SEU NOME -> FIM
-                  //SOBRANCELHAS
-                  Text(
-                    'Quer fazer a Sobrancelha?',
-                    style: TextStyle(
-                      fontFamily: 'PoppinsNormal',
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              SetSobrancelhas();
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                  width: 3,
-                                  color: boolSobrancelhas == true
-                                      ? Colors.orangeAccent
-                                      : Colors.grey.shade400,
-                                ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                width: 1,
+                                color: Colors.grey.shade900,
                               ),
-                              child: Text('Sim'),
                             ),
-                          ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: desatSobrancelhas,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                    width: 3,
-                                    color: boolSobrancelhas == false
-                                        ? Colors.orangeAccent
-                                        : Colors.grey.shade400),
+                            width: double.infinity,
+                            child: TextFormField(
+                              controller: userName,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
                               ),
-                              child: Text('Não'),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Qual o Melhor dia para você?',
-                          style: TextStyle(
-                            fontFamily: 'PoppinsNormal',
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
+                    SizedBox(
+                      height: 20,
+                    ),
+                    //SEU NOME -> FIM
+                    //SOBRANCELHAS
+                    Text(
+                      'Quer fazer a Sobrancelha?',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsNormal',
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                SetSobrancelhas();
+                              },
                               child: Container(
                                 alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'DIA',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontFamily: 'PoppinsTitle',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                height: 120,
+                                height: 40,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade900,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.elliptical(10, 10),
-                                    bottomLeft: Radius.elliptical(10, 10),
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                    width: 3,
+                                    color: boolSobrancelhas == true
+                                        ? Colors.orangeAccent
+                                        : Colors.grey.shade400,
+                                  ),
+                                ),
+                                child: Text('Sim'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: desatSobrancelhas,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                      width: 3,
+                                      color: boolSobrancelhas == false
+                                          ? Colors.orangeAccent
+                                          : Colors.grey.shade400),
+                                ),
+                                child: Text('Não'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Qual o Melhor dia para você?',
+                            style: TextStyle(
+                              fontFamily: 'PoppinsNormal',
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'DIA',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontFamily: 'PoppinsTitle',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade900,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.elliptical(10, 10),
+                                      bottomLeft: Radius.elliptical(10, 10),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '${dayView}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade900,
-                                            fontSize: 40,
-                                            fontFamily: 'PoppinsTitle',
-                                          ),
-                                        ),
-                                        Text(
-                                          '/12',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade900,
-                                            fontSize: 40,
-                                            fontFamily: 'PoppinsTitle',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(19),
-                                        color: Colors.grey.shade900,
-                                      ),
-                                      child: Row(
+                              Expanded(
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.center,
                                         children: [
-                                          InkWell(
-                                            onTap: AcresDay,
-                                            child: Icon(
-                                              Icons.keyboard_arrow_up,
-                                              color: Colors.white,
+                                          Text(
+                                            '${dayView}',
+                                            style: TextStyle(
+                                              color: Colors.grey.shade900,
+                                              fontSize: 40,
+                                              fontFamily: 'PoppinsTitle',
                                             ),
                                           ),
-                                          InkWell(
-                                            onTap: decresDay,
-                                            child: Icon(
-                                              Icons.expand_more,
-                                              color: Colors.white,
+                                          Text(
+                                            '/12',
+                                            style: TextStyle(
+                                              color: Colors.grey.shade900,
+                                              fontSize: 40,
+                                              fontFamily: 'PoppinsTitle',
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                alignment: Alignment.center,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.elliptical(10, 10),
-                                    bottomRight: Radius.elliptical(10, 10),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  //MELHOR HORARIO -> INICIO
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Qual o Melhor Horario para você?',
-                          style: TextStyle(
-                            fontFamily: 'PoppinsNormal',
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'HORÁRIO',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontFamily: 'PoppinsTitle',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade900,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.elliptical(10, 10),
-                                    bottomLeft: Radius.elliptical(10, 10),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '${hourView}:',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade900,
-                                            fontSize: 40,
-                                            fontFamily: 'PoppinsTitle',
-                                          ),
+                                      Container(
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        width:
+                                            MediaQuery.of(context).size.width / 4,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(19),
+                                          color: Colors.grey.shade900,
                                         ),
-                                        Text(
-                                          minutesView == 0
-                                              ? '${minutesView}0'
-                                              : '${minutesView}',
-                                          style: TextStyle(
-                                            color: Colors.grey.shade900,
-                                            fontSize: 40,
-                                            fontFamily: 'PoppinsTitle',
-                                          ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            InkWell(
+                                              onTap: AcresDay,
+                                              child: Icon(
+                                                Icons.keyboard_arrow_up,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: decresDay,
+                                              child: Icon(
+                                                Icons.expand_more,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    Container(
-                                      alignment: Alignment.center,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      width:
-                                          MediaQuery.of(context).size.width / 4,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(19),
-                                        color: Colors.grey.shade900,
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          InkWell(
-                                            onTap: AcressHour,
-                                            child: Icon(
-                                              Icons.keyboard_arrow_up,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: AcressMinutes,
-                                            child: Icon(
-                                              Icons.keyboard_arrow_up,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    ],
+                                  ),
+                                  alignment: Alignment.center,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.elliptical(10, 10),
+                                      bottomRight: Radius.elliptical(10, 10),
                                     ),
-                                  ],
-                                ),
-                                alignment: Alignment.center,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.elliptical(10, 10),
-                                    bottomRight: Radius.elliptical(10, 10),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  //-> FIM DA OPÇÃO DE MARCAR O HORÁRIO
-                  //SELECT PROF
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    'Selecione o seu Cabelereiro:',
-                    style: TextStyle(
-                      fontFamily: 'PoppinsNormal',
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: InkWell(
-                            onTap: selectCleber,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                  width: 3,
-                                  color: BarberSelectedCleber == true
-                                      ? Colors.orangeAccent
-                                      : Colors.grey.shade400,
-                                ),
-                              ),
-                              child: Text('Cléber'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: selectLucas,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                    width: 3,
-                                    color: BarberSelectedLucas == true
-                                        ? Colors.orangeAccent
-                                        : Colors.grey.shade400),
-                              ),
-                              child: Text(
-                                'Lucas \n Henrique',
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: InkWell(
-                            onTap: selectPedro,
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(
-                                    width: 3,
-                                    color: BarberSelectedPedro == true
-                                        ? Colors.orangeAccent
-                                        : Colors.grey.shade400),
-                              ),
-                              child: Text('Pedro Luiz'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      agendarFunciont();
-
-                      showDialog(
-                        context: context,
-                        builder: (ctx) {
-                          return AlertDialog(
-                            title: Text('Você Agendou seu Horario'),
-                            content: Text(
-                              'Você já pode verificar seu horario na tela de agenda!',
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll(
-                                    Colors.green,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    boolSobrancelhas = false;
-                                    userName.text = '';
-                                    BarberSelectedCleber = false;
-                                    BarberSelectedLucas = false;
-                                    BarberSelectedPedro = false;
-                                  });
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text(
-                                  'Fechar',
-                                  style: TextStyle(
-                                    fontFamily: 'PoppinsNormal',
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
                                   ),
                                 ),
                               ),
                             ],
-                          );
-                        },
-                      );
-                    },
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.green,
-                            border: Border.all(
-                              width: 1,
-                              color: Colors.grey.shade300,
-                            )),
-                        width: double.infinity,
-                        child: Text(
-                          'Agendar',
-                          style: TextStyle(
-                            fontFamily: 'PoppinsTitle',
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                    //MELHOR HORARIO -> INICIO
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Qual o Melhor Horario para você?',
+                            style: TextStyle(
+                              fontFamily: 'PoppinsNormal',
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'HORÁRIO',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontFamily: 'PoppinsTitle',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade900,
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.elliptical(10, 10),
+                                      bottomLeft: Radius.elliptical(10, 10),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            '${hourView}:',
+                                            style: TextStyle(
+                                              color: Colors.grey.shade900,
+                                              fontSize: 40,
+                                              fontFamily: 'PoppinsTitle',
+                                            ),
+                                          ),
+                                          Text(
+                                            minutesView == 0
+                                                ? '${minutesView}0'
+                                                : '${minutesView}',
+                                            style: TextStyle(
+                                              color: Colors.grey.shade900,
+                                              fontSize: 40,
+                                              fontFamily: 'PoppinsTitle',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        alignment: Alignment.center,
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 5),
+                                        width:
+                                            MediaQuery.of(context).size.width / 4,
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(19),
+                                          color: Colors.grey.shade900,
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            InkWell(
+                                              onTap: AcressHour,
+                                              child: Icon(
+                                                Icons.keyboard_arrow_up,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: AcressMinutes,
+                                              child: Icon(
+                                                Icons.keyboard_arrow_up,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  alignment: Alignment.center,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey.shade200,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.elliptical(10, 10),
+                                      bottomRight: Radius.elliptical(10, 10),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    //-> FIM DA OPÇÃO DE MARCAR O HORÁRIO
+                    //SELECT PROF
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Selecione o seu Cabelereiro:',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsNormal',
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: InkWell(
+                              onTap: selectCleber,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                    width: 3,
+                                    color: BarberSelectedCleber == true
+                                        ? Colors.orangeAccent
+                                        : Colors.grey.shade400,
+                                  ),
+                                ),
+                                child: Text('Cléber'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: selectLucas,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                      width: 3,
+                                      color: BarberSelectedLucas == true
+                                          ? Colors.orangeAccent
+                                          : Colors.grey.shade400),
+                                ),
+                                child: Text(
+                                  'Lucas \n Henrique',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: selectPedro,
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(
+                                      width: 3,
+                                      color: BarberSelectedPedro == true
+                                          ? Colors.orangeAccent
+                                          : Colors.grey.shade400),
+                                ),
+                                child: Text('Pedro Luiz'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        agendarFunciont();
+                
+                        showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return AlertDialog(
+                              title: Text('Você Agendou seu Horario'),
+                              content: Text(
+                                'Você já pode verificar seu horario na tela de agenda!',
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Colors.green,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      boolSobrancelhas = false;
+                                      userName.text = '';
+                                      BarberSelectedCleber = false;
+                                      BarberSelectedLucas = false;
+                                      BarberSelectedPedro = false;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    'Fechar',
+                                    style: TextStyle(
+                                      fontFamily: 'PoppinsNormal',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.green,
+                              border: Border.all(
+                                width: 1,
+                                color: Colors.grey.shade300,
+                              )),
+                          width: double.infinity,
+                          child: Text(
+                            'Agendar',
+                            style: TextStyle(
+                              fontFamily: 'PoppinsTitle',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],

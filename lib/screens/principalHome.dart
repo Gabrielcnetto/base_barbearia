@@ -1,3 +1,5 @@
+import 'dart:ui_web';
+
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
 
@@ -59,6 +61,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
         height: alturaTela,
         child: Stack(
           children: [
+
             Container(
               padding: EdgeInsets.only(top: 110),
               height: alturaTela,
@@ -70,7 +73,8 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
+
+                        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                         child: Card(
                           elevation: 3,
                           shape: RoundedRectangleBorder(
@@ -102,7 +106,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
              ),
             Container(
                width: LarguraTela,
-              height: alturaTela / 7.5,
+              height: alturaTela / 7.1,
               decoration: BoxDecoration(
                 color: Colors.white,
               ),

@@ -65,7 +65,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             right: 0,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 4.2,
+              height: MediaQuery.of(context).size.height / 3.9,
               decoration: BoxDecoration(color: Colors.white),
               child: Padding(
                 padding: const EdgeInsets.only(

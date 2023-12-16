@@ -47,37 +47,43 @@ class _StackForWidgetsState extends State<StackForWidgets> {
       height: tamanhoTela,
       child: exibList.length == 0
           ? Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Selecione um dia',
-                    style: TextStyle(
-                      fontFamily: 'PoppinsTitle',
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 18,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 80),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Selecione um dia',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 120,
-                    height: 120,
-                    child: Image.network(
-                      'https://img.freepik.com/fotos-premium/personagem-de-desenho-animado-de-um-homem_688921-4693.jpg?w=360',
-                      fit: BoxFit.cover,
+                    Container(
+                      alignment: Alignment.center,
+                      width: 120,
+                      height: 120,
+                      child: Image.network(
+                        'https://img.freepik.com/fotos-premium/personagem-de-desenho-animado-de-um-homem_688921-4693.jpg?w=360',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
-          : Column(
-              children: exibList.map((item) {
-                return AgendadoNaAgenda(
-                  item: item,
-                );
-              }).toList(),
-            ),
+          : Padding(
+            padding: const EdgeInsets.only(top: 5),
+            child: Column(
+                children: exibList.map((item) {
+                  return AgendadoNaAgenda(
+                    item: item,
+                  );
+                }).toList(),
+              ),
+          ),
     );
   }
 }

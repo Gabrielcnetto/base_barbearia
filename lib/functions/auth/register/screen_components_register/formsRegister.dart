@@ -32,7 +32,7 @@ class _FormsUserRegisterState extends State<FormsUserRegister> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 1.6,
+      height: MediaQuery.of(context).size.height / 1.4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

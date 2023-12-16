@@ -17,7 +17,7 @@ class _ProffHomeWidgetState extends State<ProffHomeWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5),
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 3.2,
+      height: MediaQuery.of(context).size.height / 3.1,
       color: Colors.grey.shade200.withOpacity(0.5),
       child: Padding(
         padding: const EdgeInsets.only(left: 14, right: 14),
