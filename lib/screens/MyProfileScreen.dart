@@ -46,7 +46,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
@@ -57,7 +57,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.grey.shade900),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Container(
@@ -92,12 +92,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'Pontos',
                                 style: TextStyle(
                                     fontFamily: 'PoppinsTitle',
@@ -106,7 +106,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               ),
                               Text(
                                 '${tamanhoLista}p',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
                                   color: Colors.grey,
@@ -116,12 +116,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'Cortes',
                                 style: TextStyle(
                                     fontFamily: 'PoppinsTitle',
@@ -130,7 +130,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                               ),
                               Text(
                                 '${tamanhoLista}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'PoppinsNormal',
                                   fontSize: 13,
                                   color: Colors.grey,
@@ -140,12 +140,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 'Nível',
                                 style: TextStyle(
                                     fontFamily: 'PoppinsTitle',
@@ -153,7 +153,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                     fontSize: 14),
                               ),
                               if (tamanhoLista <= 5)
-                                Text(
+                                const Text(
                                   'Iniciante',
                                   style: TextStyle(
                                     fontFamily: 'PoppinsNormal',
@@ -162,7 +162,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   ),
                                 ),
                               if (tamanhoLista > 5 && tamanhoLista < 8)
-                                Text(
+                                const Text(
                                   'Secundário',
                                   style: TextStyle(
                                     fontFamily: 'PoppinsNormal',
@@ -171,7 +171,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   ),
                                 ),
                               if (tamanhoLista >= 9)
-                                Text(
+                                const Text(
                                   'Vip',
                                   style: TextStyle(
                                     fontFamily: 'PoppinsNormal',
@@ -190,13 +190,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             ),
             Text(
               userName ?? 'Null',
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'PoppinsTitle',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             Row(
@@ -212,14 +212,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             context: context,
                             builder: (ctx) {
                               return Container(
-                                padding: EdgeInsets.only(
+                                padding: const EdgeInsets.only(
                                     top: 20, left: 10, right: 10),
                                 width: double.infinity,
                                 height: MediaQuery.of(context).size.height / 2,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Atualize seu Nome',
                                       style: TextStyle(
                                         fontFamily: 'PoppinsTitle',
@@ -227,14 +227,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     Container(
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 5, vertical: 10),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           bottomLeft: Radius.elliptical(10, 10),
                                           bottomRight:
                                               Radius.elliptical(10, 10),
@@ -263,7 +263,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 25,
                                     ),
                                     InkWell(
@@ -279,7 +279,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         alignment: Alignment.center,
                                         width: double.infinity,
                                         height: 40,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.elliptical(5, 5),
                                             bottomRight:
@@ -289,7 +289,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           ),
                                           color: Colors.green,
                                         ),
-                                        child: Text(
+                                        child: const Text(
                                           'Atualizar Nome',
                                           style: TextStyle(
                                             color: Colors.white,
@@ -311,7 +311,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         decoration: BoxDecoration(
                             color: Colors.grey.shade800,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Text(
+                        child: const Text(
                           'Editar Perfil',
                           style: TextStyle(
                             color: Colors.white,
@@ -337,7 +337,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         decoration: BoxDecoration(
                             color: Colors.grey.shade800,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Text(
+                        child: const Text(
                           'Sair da Conta',
                           style: TextStyle(
                             color: Colors.white,

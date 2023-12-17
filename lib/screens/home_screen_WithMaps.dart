@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _screensSelect![screen]['tela'] as Widget,
       bottomNavigationBar: CurvedNavigationBar(
         height: 50,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         onTap: attScren,
         backgroundColor: Colors.green,
         items: const [

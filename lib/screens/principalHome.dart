@@ -1,11 +1,8 @@
-import 'dart:ui_web';
-
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
 
 import 'package:projetos/screenComponents/home/percentDescont.dart';
 import 'package:projetos/screenComponents/home/profHomeWidget.dart';
-import 'package:projetos/utils/AppRoutes.dart';
 
 import 'package:provider/provider.dart';
 
@@ -58,56 +55,48 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
     final alturaTela = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Container(
-        height: alturaTela,
         child: Stack(
           children: [
-
             Container(
-              padding: EdgeInsets.only(top: 110),
-              height: alturaTela,
+              padding: const EdgeInsets.only(top: 110),
               child: SingleChildScrollView(
-                child: Positioned(
-                  top: 120,
-                  right: 0,
-                  left: 0,
-                  child: Column(
-                    children: [
-                      Padding(
-
-                        padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                        child: Card(
-                          elevation: 3,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Container(
-                            width: LarguraTela / 1,
-                            height: alturaTela / 4,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://img.freepik.com/psd-gratuitas/modelo-de-banner-de-barbearia_23-2148671093.jpg?size=626&ext=jpg&ga=GA1.1.812314629.1701018470&semt=ais',
-                                fit: BoxFit.cover,
-                              ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 10, right: 10, top: 20),
+                      child: Card(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Container(
+                          width: LarguraTela / 1,
+                          height: alturaTela / 4,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              'https://img.freepik.com/psd-gratuitas/modelo-de-banner-de-barbearia_23-2148671093.jpg?size=626&ext=jpg&ga=GA1.1.812314629.1701018470&semt=ais',
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 13,
-                      ),
-                      Container(
-                        child: ProffHomeWidget(),
-                      ),
-                      PercentDescont(),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Container(
+                      child: const ProffHomeWidget(),
+                    ),
+                    const PercentDescont(),
+                  ],
                 ),
               ),
-             ),
+            ),
             Container(
-               width: LarguraTela,
+              width: LarguraTela,
               height: alturaTela / 7.1,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Positioned(
@@ -115,6 +104,7 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                 left: 0,
                 right: 0,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
@@ -146,39 +136,30 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                   
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  width: 65,
-                                  height: 65,
-                                  child: urlPhotoImage != null
-                                      ? ClipRRect(
-                                          child: Image.network(
-                                            urlPhotoImage!,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                        )
-                                      : ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          child: Image.network(
-                                            'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                ),
-                              ],
+                            const Column(
+                              children: [],
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Container(
+                              width: 65,
+                              height: 65,
+                              child: urlPhotoImage != null
+                                  ? ClipRRect(
+                                      child: Image.network(
+                                        urlPhotoImage!,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(30),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Image.network(
+                                        'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                             ),
                           ],
                         ),

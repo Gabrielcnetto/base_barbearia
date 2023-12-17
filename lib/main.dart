@@ -1,4 +1,6 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
@@ -11,12 +13,24 @@ import 'package:projetos/screens/scheduleScreen.dart';
 import 'package:projetos/utils/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+//void main() async {
+//  WidgetsFlutterBinding.ensureInitialized();
+//  await Firebase.initializeApp();
+//  runApp(
+//    DevicePreview(
+//      enabled: !kReleaseMode,
+//      // ignore: prefer_const_constructors
+//      builder: (context) => AlmiranteApp(), // Wrap your app
+//    ),
+//  );
+// }
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const AlmiranteApp());
+  runApp(
+    const AlmiranteApp(),
+  );
 }
-
 class AlmiranteApp extends StatelessWidget {
   const AlmiranteApp({super.key});
 
@@ -35,6 +49,11 @@ class AlmiranteApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: 'Almirante Barbearia',
         routes: {
@@ -42,7 +61,7 @@ class AlmiranteApp extends StatelessWidget {
           AppRoutes.HomeScreen: (ctx) => const HomeScreen(),
           AppRoutes.AuthScreenPrimary: (ctx) => const AuthScreenPrimary(),
           AppRoutes.RegisterScreen: (ctx) => const RegisterScreen(),
-          AppRoutes.ScheduleScreen: (ctx)=>const ScheduleScreen(),
+          AppRoutes.ScheduleScreen: (ctx) => const ScheduleScreen(),
         },
       ),
     );

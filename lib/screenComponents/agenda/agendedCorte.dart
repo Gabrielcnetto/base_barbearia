@@ -25,10 +25,10 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
         bottom: 20,
       ),
       child: Container(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.bottomCenter,
         width: double.infinity,
         height: MediaQuery.of(context).size.height / 5,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.elliptical(15, 15),
             topRight: Radius.elliptical(15, 15),
@@ -41,17 +41,18 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.item.userName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontFamily: 'PoppinsTitle',
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Row(
@@ -59,17 +60,17 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                   children: [
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.schedule,
                           color: Colors.white,
                           size: 20,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 4,
                         ),
                         Text(
                           '${widget.item.FirstComponentHour}:${widget.item.SecondComponentHour}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'PoppinsNormal',
                             color: Colors.white,
                             fontSize: 12,
@@ -78,22 +79,22 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.calendar_month,
                           color: Colors.white,
                           size: 20,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 4,
                         ),
                         Text(
                           '${widget.item.day}/${widget.item.month}/${widget.item.year}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'PoppinsNormal',
                             color: Colors.white,
                             fontSize: 12,
@@ -104,7 +105,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -112,16 +113,16 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                     color: Colors.orangeAccent,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.check,
                         size: 15,
                         color: Colors.black,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       Text(
@@ -138,7 +139,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -146,7 +147,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -155,7 +156,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
                         size: 20,
                         color: Colors.grey.shade900,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 4,
                       ),
                       Text(
@@ -186,7 +187,7 @@ class _AgendadoNaAgendaState extends State<AgendadoNaAgenda> {
             ),
           ],
         ),
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       ),
     );
   }

@@ -1,12 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projetos/classes/agendaClass.dart';
 import 'package:projetos/classes/profissionalClass.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/lists/ProfissionalList.dart';
-import 'package:projetos/screenComponents/home/profHomeWidget.dart';
-import 'package:projetos/utils/AppRoutes.dart';
+
 import 'package:provider/provider.dart';
 
 class AgendarFunctionScreen extends StatefulWidget {
@@ -23,7 +21,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     // TODO: implement initState
     super.initState();
     LoadUrlImageUserdb();
-    
+
     Provider.of<CreateUserProvider>(context, listen: false).getImageUser();
     print('foto passada: ${userUrlImagePhotoLink}');
   }
@@ -33,14 +31,24 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
   int hourView = 12;
   int minutesView = 15;
   void AcresDay() {
-    setState(() {
-      dayView += 1;
-    });
+    if (dayView < 31) {
+      setState(() {
+        dayView += 1;
+      });
+    } else if (dayView >= 31) {
+      setState(() {
+        dayView = 1;
+      });
+    }
   }
 
   void decresDay() {
     setState(() {
-      dayView -= 1;
+      if (dayView > 1) {
+        dayView -= 1;
+      } else if (dayView == 0) {
+        dayView = 1;
+      }
     });
   }
 
@@ -90,25 +98,122 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
   String? userUrlImagePhotoLink;
   Future<void> LoadUrlImageUserdb() async {
     String? descUser = await CreateUserProvider().getImageUser();
-  
+
     setState(() {
       userUrlImagePhotoLink = descUser;
     });
   }
 
-  void agendarFunciont() {
-    final provider =
-        Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
-      username: userName.text,
-      imageUser: userUrlImagePhotoLink ?? '',
-      sobrancelha: boolSobrancelhas,
-      cabelereiro: selectBarber(),
-      FirstComponentHour: hourView,
-      SecondComponentHour: minutesView,
-      day: dayView,
-      month: 12,
-      year: 2023,
-    );
+  Future<void> agendarFunciont() async {
+    //INICIO -> Verificando a lista do dia
+    await Provider.of<AgendaProvider>(context, listen: false)
+        .loadListCortes(dayView);
+    List<agendaItem> lista =
+        await Provider.of<AgendaProvider>(context, listen: false).agendaLista;
+    //FIM -> Verificando a lista do dia
+
+    bool agendamentoExiste = false;
+
+    for (var item in lista) {
+      if (item.day == dayView &&
+          item.FirstComponentHour == hourView &&
+          item.month == 12 &&
+          item.Cabelereiro == selectBarber()) {
+        // Mostrar uma mensagem para o usuário
+
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              title: const Text('Horário já preenchido'),
+              content: const Text(
+                'Este horário já esta preenchido, por favor escolha outro',
+              ),
+              actions: [
+                ElevatedButton(
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Colors.green,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    'Fechar',
+                    style: TextStyle(
+                      fontFamily: 'PoppinsNormal',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+        setState(() {
+          agendamentoExiste = true;
+        });
+        break; // Cancelar a adição
+      } else {
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return AlertDialog(
+              title: const Text('Você Agendou seu Horario'),
+              content: const Text(
+                'Você já pode verificar seu horario na tela de agenda!',
+              ),
+              actions: [
+                ElevatedButton(
+                  style: const ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Colors.green,
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      boolSobrancelhas = false;
+                      userName.text = '';
+                      BarberSelectedCleber = false;
+                      BarberSelectedLucas = false;
+                      BarberSelectedPedro = false;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(
+                    'Fechar',
+                    style: TextStyle(
+                      fontFamily: 'PoppinsNormal',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    }
+
+    if (!agendamentoExiste) {
+      final provider =
+          Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
+        username: userName.text,
+        imageUser: userUrlImagePhotoLink ?? '',
+        sobrancelha: boolSobrancelhas,
+        cabelereiro: selectBarber(),
+        FirstComponentHour: hourView,
+        SecondComponentHour: minutesView,
+        day: dayView,
+        month: 12,
+        year: 2023,
+      );
+    }
+
+    print('tamanho atual da lista: ${lista.length}');
   }
 
   bool BarberSelectedCleber = false;
@@ -128,7 +233,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
       BarberSelectedLucas = true;
       BarberSelectedCleber = false;
       BarberSelectedPedro = false;
-        LoadUrlImageUserdb();
+      LoadUrlImageUserdb();
       print('barbeiro: ${userUrlImagePhotoLink}');
     });
   }
@@ -144,7 +249,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     setState(() {
       BarberSelectedPedro = true;
       BarberSelectedCleber = false;
-        LoadUrlImageUserdb();
+      LoadUrlImageUserdb();
       print('barbeiro: ${userUrlImagePhotoLink}');
       BarberSelectedLucas = false;
     });
@@ -162,14 +267,14 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Agendar Corte',
               style: TextStyle(
                 fontFamily: 'PoppinsTitle',
                 fontSize: 22,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             //SEU NOME -> INCIO
@@ -185,7 +290,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Seu Nome',
                             style: TextStyle(
                               fontFamily: 'PoppinsNormal',
@@ -194,11 +299,11 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
@@ -209,7 +314,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                             width: double.infinity,
                             child: TextFormField(
                               controller: userName,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: InputBorder.none,
                               ),
                             ),
@@ -217,12 +322,12 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     //SEU NOME -> FIM
                     //SOBRANCELHAS
-                    Text(
+                    const Text(
                       'Quer fazer a Sobrancelha?',
                       style: TextStyle(
                         fontFamily: 'PoppinsNormal',
@@ -231,7 +336,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -255,7 +360,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                         : Colors.grey.shade400,
                                   ),
                                 ),
-                                child: Text('Sim'),
+                                child: const Text('Sim'),
                               ),
                             ),
                           ),
@@ -273,14 +378,14 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                           ? Colors.orangeAccent
                                           : Colors.grey.shade400),
                                 ),
-                                child: Text('Não'),
+                                child: const Text('Não'),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -288,7 +393,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Qual o Melhor dia para você?',
                             style: TextStyle(
                               fontFamily: 'PoppinsNormal',
@@ -297,7 +402,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
@@ -305,9 +410,10 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                               Expanded(
                                 child: Container(
                                   alignment: Alignment.center,
-                                  child: Column(
+                                  child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         'DIA',
@@ -322,7 +428,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                   height: 120,
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade900,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topLeft: Radius.elliptical(10, 10),
                                       bottomLeft: Radius.elliptical(10, 10),
                                     ),
@@ -357,13 +463,15 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                         ],
                                       ),
                                       Container(
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
                                         width:
-                                            MediaQuery.of(context).size.width / 4,
+                                            MediaQuery.of(context).size.width /
+                                                4,
                                         height: 30,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(19),
+                                          borderRadius:
+                                              BorderRadius.circular(19),
                                           color: Colors.grey.shade900,
                                         ),
                                         child: Row(
@@ -372,14 +480,14 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                           children: [
                                             InkWell(
                                               onTap: AcresDay,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.keyboard_arrow_up,
                                                 color: Colors.white,
                                               ),
                                             ),
                                             InkWell(
                                               onTap: decresDay,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.expand_more,
                                                 color: Colors.white,
                                               ),
@@ -393,7 +501,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                   height: 120,
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade200,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topRight: Radius.elliptical(10, 10),
                                       bottomRight: Radius.elliptical(10, 10),
                                     ),
@@ -406,7 +514,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                       ),
                     ),
                     //MELHOR HORARIO -> INICIO
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
@@ -414,7 +522,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Qual o Melhor Horario para você?',
                             style: TextStyle(
                               fontFamily: 'PoppinsNormal',
@@ -423,7 +531,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
@@ -431,9 +539,10 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                               Expanded(
                                 child: Container(
                                   alignment: Alignment.center,
-                                  child: Column(
+                                  child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         'HORÁRIO',
@@ -448,7 +557,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                   height: 120,
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade900,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topLeft: Radius.elliptical(10, 10),
                                       bottomLeft: Radius.elliptical(10, 10),
                                     ),
@@ -459,7 +568,8 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                 child: Container(
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Row(
                                         mainAxisAlignment:
@@ -487,13 +597,15 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                       ),
                                       Container(
                                         alignment: Alignment.center,
-                                        padding:
-                                            EdgeInsets.symmetric(horizontal: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
                                         width:
-                                            MediaQuery.of(context).size.width / 4,
+                                            MediaQuery.of(context).size.width /
+                                                4,
                                         height: 30,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(19),
+                                          borderRadius:
+                                              BorderRadius.circular(19),
                                           color: Colors.grey.shade900,
                                         ),
                                         child: Row(
@@ -502,14 +614,14 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                           children: [
                                             InkWell(
                                               onTap: AcressHour,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.keyboard_arrow_up,
                                                 color: Colors.white,
                                               ),
                                             ),
                                             InkWell(
                                               onTap: AcressMinutes,
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.keyboard_arrow_up,
                                                 color: Colors.white,
                                               ),
@@ -523,7 +635,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                   height: 120,
                                   decoration: BoxDecoration(
                                     color: Colors.grey.shade200,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       topRight: Radius.elliptical(10, 10),
                                       bottomRight: Radius.elliptical(10, 10),
                                     ),
@@ -537,10 +649,10 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                     ),
                     //-> FIM DA OPÇÃO DE MARCAR O HORÁRIO
                     //SELECT PROF
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Text(
+                    const Text(
                       'Selecione o seu Cabelereiro:',
                       style: TextStyle(
                         fontFamily: 'PoppinsNormal',
@@ -549,7 +661,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
@@ -570,7 +682,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                         : Colors.grey.shade400,
                                   ),
                                 ),
-                                child: Text('Cléber'),
+                                child: const Text('Cléber'),
                               ),
                             ),
                           ),
@@ -588,7 +700,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                           ? Colors.orangeAccent
                                           : Colors.grey.shade400),
                                 ),
-                                child: Text(
+                                child: const Text(
                                   'Lucas \n Henrique',
                                   textAlign: TextAlign.center,
                                 ),
@@ -609,66 +721,27 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                           ? Colors.orangeAccent
                                           : Colors.grey.shade400),
                                 ),
-                                child: Text('Pedro Luiz'),
+                                child: const Text('Pedro Luiz'),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     InkWell(
                       onTap: () {
                         agendarFunciont();
-                
-                        showDialog(
-                          context: context,
-                          builder: (ctx) {
-                            return AlertDialog(
-                              title: Text('Você Agendou seu Horario'),
-                              content: Text(
-                                'Você já pode verificar seu horario na tela de agenda!',
-                              ),
-                              actions: [
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll(
-                                      Colors.green,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      boolSobrancelhas = false;
-                                      userName.text = '';
-                                      BarberSelectedCleber = false;
-                                      BarberSelectedLucas = false;
-                                      BarberSelectedPedro = false;
-                                    });
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(
-                                    'Fechar',
-                                    style: TextStyle(
-                                      fontFamily: 'PoppinsNormal',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
                       },
                       child: Card(
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -678,7 +751,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                 color: Colors.grey.shade300,
                               )),
                           width: double.infinity,
-                          child: Text(
+                          child: const Text(
                             'Agendar',
                             style: TextStyle(
                               fontFamily: 'PoppinsTitle',

@@ -48,7 +48,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     return SafeArea(
       child: Stack(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Container(
@@ -66,7 +66,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 3.9,
-              decoration: BoxDecoration(color: Colors.white),
+              decoration: const BoxDecoration(color: Colors.white),
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: 15,
@@ -78,7 +78,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Horarios Preenchidos',
                             style: TextStyle(
                               fontFamily: 'PoppinsTitle',
@@ -96,7 +96,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
@@ -115,12 +115,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
                           alignment: Alignment.center,
-                          padding: EdgeInsets.only(left: 5, right: 5),
+                          padding: const EdgeInsets.only(left: 5, right: 5),
                           width: double.infinity,
                           height: 75,
                           child: Row(
@@ -149,7 +149,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                             width: 0.5,
                                             color:
                                                 Colors.grey.withOpacity(0.5)),
-                                        borderRadius: BorderRadius.only(
+                                        borderRadius: const BorderRadius.only(
                                           topLeft: Radius.elliptical(20, 20),
                                           topRight: Radius.elliptical(20, 20),
                                           bottomLeft: Radius.elliptical(20, 20),
@@ -176,7 +176,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                           ),
                                           Text(
                                             '${day}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontFamily: 'PoppinsTitle',
                                               fontSize: 22,

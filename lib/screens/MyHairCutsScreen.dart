@@ -64,38 +64,38 @@ class _MyHairCutScreenState extends State<MyHairCutScreen> {
                       children: [
                         if (myCortes.length <= 5)
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Icon(
+                            child: const Icon(
                               Icons.trip_origin_sharp,
                               color: Colors.white,
                             ),
                           ),
                         if (myCortes.length > 5 && myCortes.length < 8)
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: Colors.orangeAccent,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Icon(
+                            child: const Icon(
                               Icons.trip_origin_sharp,
                               color: Colors.white,
                             ),
                           ),
                         if (myCortes.length >= 9)
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
                                 color: Colors.red,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Icon(
+                            child: const Icon(
                               Icons.trip_origin_sharp,
                               color: Colors.white,
                             ),
                           ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         if (myCortes.length <= 5)
@@ -125,7 +125,7 @@ class _MyHairCutScreenState extends State<MyHairCutScreen> {
                               fontSize: 13,
                             ),
                           ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                       ],
@@ -133,7 +133,7 @@ class _MyHairCutScreenState extends State<MyHairCutScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Column(

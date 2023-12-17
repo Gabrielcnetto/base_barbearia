@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
@@ -52,7 +51,7 @@ class _StackForWidgetsState extends State<StackForWidgets> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Selecione um dia',
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
@@ -76,13 +75,15 @@ class _StackForWidgetsState extends State<StackForWidgets> {
             )
           : Padding(
             padding: const EdgeInsets.only(top: 5),
-            child: Column(
-                children: exibList.map((item) {
-                  return AgendadoNaAgenda(
-                    item: item,
-                  );
-                }).toList(),
-              ),
+            child: SingleChildScrollView(
+              child: Column(
+                  children: exibList.map((item) {
+                    return AgendadoNaAgenda(
+                      item: item,
+                    );
+                  }).toList(),
+                ),
+            ),
           ),
     );
   }

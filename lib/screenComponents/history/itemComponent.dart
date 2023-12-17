@@ -22,7 +22,7 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
@@ -40,7 +40,7 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
               children: [
                 Text(
                   'Data do Corte: ${widget.item.day}/${widget.item.month}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontFamily: 'PoppinsTitle',
@@ -48,7 +48,7 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
                 ),
                 IconButton(
                   onPressed: trueMoreInf,
-                  icon: Icon(Icons.expand_more),
+                  icon: const Icon(Icons.expand_more),
                 ),
               ],
             ),
@@ -62,11 +62,11 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
                       children: [
                         Text(
                           'Cabelereiro: ${widget.item.Cabelereiro}',
-                          style: TextStyle(fontFamily: 'PoppinsNormal'),
+                          style: const TextStyle(fontFamily: 'PoppinsNormal'),
                         ),
                         Text(
                           'Cliente: ${widget.item.userName}',
-                          style: TextStyle(fontFamily: 'PoppinsNormal'),
+                          style: const TextStyle(fontFamily: 'PoppinsNormal'),
                         ),
                       ],
                     ),
@@ -76,15 +76,15 @@ class _ComponenetScreenState extends State<ComponenetScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(10)),
-                            child: Icon(
+                            child: const Icon(
                               Icons.currency_ruble,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 5,),
-                          Text('+1 Ponto', style: TextStyle(fontFamily: 'PoppinsTitle', fontWeight: FontWeight.bold),)
+                          const SizedBox(height: 5,),
+                          const Text('+1 Ponto', style: TextStyle(fontFamily: 'PoppinsTitle', fontWeight: FontWeight.bold),)
                         ],
                       ),
                     )

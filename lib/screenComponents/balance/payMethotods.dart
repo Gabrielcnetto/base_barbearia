@@ -9,7 +9,7 @@ class PaymentMethodsComponent extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15),
       child: Container(
         width: double.infinity,
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
