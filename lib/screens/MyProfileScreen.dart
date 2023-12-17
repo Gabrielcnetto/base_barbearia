@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/functions/auth/functions/createUser.dart';
+import 'package:projetos/screenComponents/perfil/lastAgend.dart';
 import 'package:provider/provider.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -350,7 +351,53 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+              height: 5,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey.withOpacity(0.3),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Seu Último Agendamento',
+              style: TextStyle(
+                fontFamily: 'PoppinsNormal',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey.shade200,
+                  ),
+                ),
+                child: LastAgenda(agenda: listaMyCortes[0]),
+              ),
+            ),
           ],
         ),
       ),

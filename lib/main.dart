@@ -31,6 +31,7 @@ Future<void> main() async {
     const AlmiranteApp(),
   );
 }
+
 class AlmiranteApp extends StatelessWidget {
   const AlmiranteApp({super.key});
 
@@ -49,11 +50,11 @@ class AlmiranteApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
+        // useInheritedMediaQuery: true,
+        // locale: DevicePreview.locale(context),
+        //  builder: DevicePreview.appBuilder,
+        // theme: ThemeData.light(),
+        // darkTheme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         title: 'Almirante Barbearia',
         routes: {
