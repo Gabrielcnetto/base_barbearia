@@ -14,10 +14,10 @@ class agendaItem {
   final int month;
   final String imageUser;
   final int year;
- 
+  final double ramdomNumber;
 
   agendaItem({
-   
+    required this.ramdomNumber,
     required this.sobrancela,
     required this.userName,
     required this.imageUser,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -25,10 +27,12 @@ class AgendaProvider with ChangeNotifier {
     required int month,
     required String imageUser,
     required int year,
+    required double ramdomNumber,
     bool? sobrancelha,
   }) async {
     _agendaLista.add(
       agendaItem(
+        ramdomNumber: ramdomNumber,
         imageUser: imageUser,
         userName: username,
         sobrancela: sobrancelha!,
@@ -55,6 +59,7 @@ class AgendaProvider with ChangeNotifier {
       'month': month,
       'year': year,
       'sobrancelha': sobrancelha,
+      'ramdomNumber': ramdomNumber,
     });
     await dataBaseFirestore
         .collection("meusCortes")
@@ -93,6 +98,7 @@ class AgendaProvider with ChangeNotifier {
           List<DocumentSnapshot> docs = querySnapshot.docs;
           _historyList.add(
             agendaItem(
+              ramdomNumber: data['ramdomNumber'],
               imageUser: '',
               sobrancela: data['sobrancelha'],
               userName: data['username'],
@@ -127,7 +133,9 @@ class AgendaProvider with ChangeNotifier {
         try {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           _agendaLista.add(
+
             agendaItem(
+              ramdomNumber: data['ramdomNumber'],
               imageUser: data['imageProfileUser'],
               sobrancela: data['sobrancelha'],
               userName: data['username'],

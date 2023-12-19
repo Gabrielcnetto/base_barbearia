@@ -10,6 +10,13 @@ class LastAgenda extends StatefulWidget {
 }
 
 class _LastAgendaState extends State<LastAgenda> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('o numero total é ${widget.agenda.ramdomNumber}')
+;  }
+  
   void showQrModal() {
     showModalBottomSheet(
       context: context,
@@ -53,7 +60,7 @@ class _LastAgendaState extends State<LastAgenda> {
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text('aqui o código'),
+                child: Text(widget.agenda.ramdomNumber.toString()),
               ),
               SizedBox(
                 height: 10,

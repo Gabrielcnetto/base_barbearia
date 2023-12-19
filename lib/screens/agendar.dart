@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
 import 'package:projetos/classes/profissionalClass.dart';
@@ -199,8 +201,11 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     }
 
     if (!agendamentoExiste) {
+      var rng = new Random();
+      double number =  rng.nextInt(90000) + 10000;
       final provider =
           Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
+        ramdomNumber: number,
         username: userName.text,
         imageUser: userUrlImagePhotoLink ?? '',
         sobrancelha: boolSobrancelhas,
