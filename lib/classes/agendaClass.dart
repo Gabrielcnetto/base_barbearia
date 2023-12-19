@@ -1,5 +1,3 @@
-
-
 class agendaItem {
   //atributos visuais
 
@@ -16,8 +14,10 @@ class agendaItem {
   final int month;
   final String imageUser;
   final int year;
+ 
 
   agendaItem({
+   
     required this.sobrancela,
     required this.userName,
     required this.imageUser,
@@ -30,5 +30,4 @@ class agendaItem {
   });
 
   // Construtor que preenche os campos da classe com os dados do documento
-
 }

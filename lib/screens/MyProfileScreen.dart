@@ -380,24 +380,37 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             SizedBox(
               height: 10,
             ),
-            Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 5,
-                decoration: BoxDecoration(
+            if (listaMyCortes.length >= 1)
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.grey.shade200,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 5,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.grey.shade200,
+                    ),
+                  ),
+                  child: LastAgenda(agenda: listaMyCortes[0]),
+                ),
+              ),
+            if (listaMyCortes.length < 1)
+              Center(
+                child: Text(
+                  'Você não tem agendamentos ativos.',
+                  style: TextStyle(
+                    fontFamily: 'PoppinsTitle',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.grey.shade900.withOpacity(0.7),
                   ),
                 ),
-                child: LastAgenda(agenda: listaMyCortes[0]),
-              ),
-            ),
+              )
           ],
         ),
       ),
