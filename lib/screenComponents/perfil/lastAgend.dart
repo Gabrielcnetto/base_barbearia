@@ -10,17 +10,16 @@ class LastAgenda extends StatefulWidget {
 }
 
 class _LastAgendaState extends State<LastAgenda> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print('o numero total é ${widget.agenda.ramdomNumber}')
-;  }
-  
   void showQrModal() {
     showModalBottomSheet(
       context: context,
-      builder: (ctx) {
+      builder: (BuildContext context) {
+        String numberGeral = widget.agenda.ramdomNumber.toString();
+        var num1 = int.parse(numberGeral[0]);
+        var num2 = int.parse(numberGeral[1]);
+        var num3 = int.parse(numberGeral[2]);
+        var num4 = int.parse(numberGeral[3]);
+        var num5 = int.parse(numberGeral[4]);
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           width: double.infinity,
@@ -60,7 +59,177 @@ class _LastAgendaState extends State<LastAgenda> {
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Text(widget.agenda.ramdomNumber.toString()),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(15, 15),
+                          bottomRight: Radius.elliptical(15, 15),
+                          topLeft: Radius.elliptical(15, 15),
+                          topRight: Radius.elliptical(15, 15),
+                        ),
+                      ),
+                      elevation: 2,
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          '${num1}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PoppinsTitle',
+                            fontSize: 16,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(15, 15),
+                            bottomRight: Radius.elliptical(15, 15),
+                            topLeft: Radius.elliptical(15, 15),
+                            topRight: Radius.elliptical(15, 15),
+                          ),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.grey.shade900.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(15, 15),
+                          bottomRight: Radius.elliptical(15, 15),
+                          topLeft: Radius.elliptical(15, 15),
+                          topRight: Radius.elliptical(15, 15),
+                        ),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          '${num2}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PoppinsTitle',
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(15, 15),
+                            bottomRight: Radius.elliptical(15, 15),
+                            topLeft: Radius.elliptical(15, 15),
+                            topRight: Radius.elliptical(15, 15),
+                          ),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.grey.shade900.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(15, 15),
+                          bottomRight: Radius.elliptical(15, 15),
+                          topLeft: Radius.elliptical(15, 15),
+                          topRight: Radius.elliptical(15, 15),
+                        ),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          '${num3}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PoppinsTitle',
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(15, 15),
+                            bottomRight: Radius.elliptical(15, 15),
+                            topLeft: Radius.elliptical(15, 15),
+                            topRight: Radius.elliptical(15, 15),
+                          ),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.grey.shade900.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(15, 15),
+                          bottomRight: Radius.elliptical(15, 15),
+                          topLeft: Radius.elliptical(15, 15),
+                          topRight: Radius.elliptical(15, 15),
+                        ),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          '${num4}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PoppinsTitle',
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(15, 15),
+                            bottomRight: Radius.elliptical(15, 15),
+                            topLeft: Radius.elliptical(15, 15),
+                            topRight: Radius.elliptical(15, 15),
+                          ),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.grey.shade900.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(15, 15),
+                          bottomRight: Radius.elliptical(15, 15),
+                          topLeft: Radius.elliptical(15, 15),
+                          topRight: Radius.elliptical(15, 15),
+                        ),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          '${num5}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'PoppinsTitle',
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.elliptical(15, 15),
+                            bottomRight: Radius.elliptical(15, 15),
+                            topLeft: Radius.elliptical(15, 15),
+                            topRight: Radius.elliptical(15, 15),
+                          ),
+                          border: Border.all(
+                            width: 0.5,
+                            color: Colors.grey.shade900.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 10,

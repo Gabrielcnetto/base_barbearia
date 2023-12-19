@@ -14,7 +14,7 @@ class agendaItem {
   final int month;
   final String imageUser;
   final int year;
-  final double ramdomNumber;
+  final int ramdomNumber;
 
   agendaItem({
     required this.ramdomNumber,

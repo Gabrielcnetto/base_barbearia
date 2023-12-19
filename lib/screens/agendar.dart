@@ -202,7 +202,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
 
     if (!agendamentoExiste) {
       var rng = new Random();
-      double number =  rng.nextInt(90000) + 10000;
+      int number = rng.nextInt(90000) + 10000;
       final provider =
           Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
         ramdomNumber: number,
