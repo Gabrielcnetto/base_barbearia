@@ -29,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
     final provider = Provider.of<CreateUserProvider>(context, listen: false);
     provider.CreateUser(
+      isProff: false,
       urlImage: File(image!.path),
       userNameCreate: User,
       userEmailCreate: usereMail!,
@@ -70,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only( left: 15, right: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15),
           child: Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height / 1,

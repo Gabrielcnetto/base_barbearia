@@ -13,6 +13,13 @@ class AuthScreenPrimary extends StatefulWidget {
 }
 
 class _AuthScreenPrimaryState extends State<AuthScreenPrimary> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<CreateUserProvider>(context, listen: false).getIsProff();
+  }
+
   final emailControler = TextEditingController();
   final passwordControler = TextEditingController();
 

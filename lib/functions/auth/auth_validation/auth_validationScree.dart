@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/utils/AppRoutes.dart';
+import 'package:provider/provider.dart';
 
 class AuthValidationScree extends StatefulWidget {
   const AuthValidationScree({super.key});
@@ -22,7 +24,7 @@ class _AuthValidationScreeState extends State<AuthValidationScree> {
         if (snpshot.hasData) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.of(context).pushNamed(
-              AppRoutes.HomeScreen,
+              AppRoutes.ValidationTypeUser,
             );
           });
         } else {

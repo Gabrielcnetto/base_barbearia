@@ -5,4 +5,5 @@ class AppRoutes {
   static const AuthScreenPrimary = '/AuthScreenPrimary';
   static const MyCurrentBalance = '/MyCurrentBalance';
   static const ScheduleScreen = '/ScheduleScreen';
+  static const ValidationTypeUser = '/ValidationTypeUser';
 }

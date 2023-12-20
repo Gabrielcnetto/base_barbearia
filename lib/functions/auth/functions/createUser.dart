@@ -16,6 +16,7 @@ class CreateUserProvider with ChangeNotifier {
     required String phoneNumberCreate,
     required String PasswordCreate,
     required File urlImage,
+    required bool isProff,
   }) async {
     await authSettings.createUserWithEmailAndPassword(
       email: userEmailCreate,
@@ -35,6 +36,7 @@ class CreateUserProvider with ChangeNotifier {
 
     await dataBaseFirestore.collection('usuarios').doc(userIdCreate).set({
       'userName': userNameCreate,
+      'isProff': isProff,
       'userEmail': userEmailCreate,
       'PhoneNumber': phoneNumberCreate,
       'urlPhotoLink': imageProfileImage,
@@ -60,18 +62,31 @@ class CreateUserProvider with ChangeNotifier {
           .get()
           .then((getData) {
         if (getData.exists) {
-         print('foto ${getData.data()?["urlPhotoLink"]}');
+          print('foto ${getData.data()?["urlPhotoLink"]}');
 
           urlImage = getData.data()?["urlPhotoLink"];
-        } else {
-         
-        }
+        } else {}
       });
       return urlImage;
     }
     return null;
   }
 
+  Future<bool?> getIsProff() async {
+    if (authSettings.currentUser != null) {
+      bool? isProff;
+      await dataBaseFirestore
+          .collection("usuarios")
+          .doc(authSettings.currentUser!.uid)
+          .get()
+          .then((getData) {
+        if (getData.exists) {
+          isProff = getData.data()?["isProff"];
+        } else {}
+      });
+      return isProff;
+    }
+  }
 
   Future<String?> getNameUser() async {
     if (authSettings.currentUser != null) {
@@ -89,7 +104,8 @@ class CreateUserProvider with ChangeNotifier {
     }
     return null;
   }
-Future<String?> getWhatsNumber() async {
+
+  Future<String?> getWhatsNumber() async {
     if (authSettings.currentUser != null) {
       String? whatsNumber;
       await dataBaseFirestore
@@ -105,6 +121,7 @@ Future<String?> getWhatsNumber() async {
     }
     return null;
   }
+
   Future<void> attProfile(String NewUserName) async {
     final userRef = dataBaseFirestore
         .collection("usuarios")
@@ -116,7 +133,8 @@ Future<String?> getWhatsNumber() async {
       notifyListeners();
     });
   }
-  Future<void>deleteAcc()async{
+
+  Future<void> deleteAcc() async {
     authSettings.currentUser!.delete();
   }
 }
