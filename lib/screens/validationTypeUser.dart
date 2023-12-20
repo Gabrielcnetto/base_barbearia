@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/screens/home_screen_WithMaps.dart';
-import 'package:projetos/screens/isProffScreen.dart';
+import 'package:projetos/admScreens/isProffScreen.dart';
 
 class ValidationTypeUser extends StatefulWidget {
   const ValidationTypeUser({super.key});
