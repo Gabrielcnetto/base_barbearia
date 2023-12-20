@@ -28,10 +28,18 @@ class AgendaProvider with ChangeNotifier {
     required String imageUser,
     required int year,
     required int ramdomNumber,
+    required String id,
+    required String currentUserId,
+    required String whatsContatoNumber,
+    bool? isActive,
     bool? sobrancelha,
   }) async {
     _agendaLista.add(
       agendaItem(
+        whatsContatoNumber: whatsContatoNumber,
+        isActive: isActive!,
+        currentUserId: currentUserId,
+        id: id,
         ramdomNumber: ramdomNumber,
         imageUser: imageUser,
         userName: username,
@@ -50,8 +58,11 @@ class AgendaProvider with ChangeNotifier {
         .doc('dezembro')
         .collection('${day}')
         .add({
+          'id': id,
+          'whatsContatoNumber': whatsContatoNumber,
       'imageProfileUser': imageUser,
       'username': username,
+      'isActive': isActive,
       'cabelereiro': cabelereiro,
       'FirstComponentHour': FirstComponentHour,
       'SecondComponentHour': SecondComponentHour,
@@ -60,6 +71,7 @@ class AgendaProvider with ChangeNotifier {
       'year': year,
       'sobrancelha': sobrancelha,
       'ramdomNumber': ramdomNumber,
+      'currentUserId': currentUserId,
     });
     await dataBaseFirestore
         .collection("meusCortes")
@@ -68,14 +80,18 @@ class AgendaProvider with ChangeNotifier {
         .add(
       {
         'username': username,
+        'whatsContatoNumber': whatsContatoNumber,
+        'id': id,
         'cabelereiro': cabelereiro,
         'FirstComponentHour': FirstComponentHour,
         'SecondComponentHour': SecondComponentHour,
         'day': day,
         'month': month,
+        'isActive': isActive,
         'ramdomNumber': ramdomNumber,
         'year': year,
         'sobrancelha': sobrancelha,
+        'currentUserId': currentUserId,
       },
     );
 
@@ -99,7 +115,10 @@ class AgendaProvider with ChangeNotifier {
           List<DocumentSnapshot> docs = querySnapshot.docs;
           final int ramdomNumberData = await data['ramdomNumber'];
           _historyList.add(
-            agendaItem(
+            agendaItem(whatsContatoNumber: data['whatsContatoNumber'],
+              isActive: data['isActive'],
+              currentUserId: data['currentUserId'],
+              id: data['id'],
               ramdomNumber: ramdomNumberData,
               imageUser: '',
               sobrancela: data['sobrancelha'],
@@ -136,6 +155,10 @@ class AgendaProvider with ChangeNotifier {
           Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
           _agendaLista.add(
             agendaItem(
+              whatsContatoNumber: data['whatsContatoNumber'],
+              isActive: data['isActive'],
+              currentUserId: data['currentUserId'],
+              id: data['id'],
               ramdomNumber: data['ramdomNumber'],
               imageUser: data['imageProfileUser'],
               sobrancela: data['sobrancelha'],
@@ -152,4 +175,6 @@ class AgendaProvider with ChangeNotifier {
       }
     }
   }
+
+
 }

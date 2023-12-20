@@ -20,11 +20,14 @@ class _LastAgendaState extends State<LastAgenda> {
         var num3 = int.parse(numberGeral[2]);
         var num4 = int.parse(numberGeral[3]);
         var num5 = int.parse(numberGeral[4]);
+      
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           width: double.infinity,
           height: MediaQuery.of(context).size.height / 1.5,
-          child: Column(
+          child: 
+        
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -59,7 +62,8 @@ class _LastAgendaState extends State<LastAgenda> {
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Row(
+                
+                child: widget.agenda.isActive == true ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Card(
@@ -229,7 +233,7 @@ class _LastAgendaState extends State<LastAgenda> {
                       ),
                     ),
                   ],
-                ),
+                ) : Text('Corte Realizado', style: TextStyle(fontFamily: 'PoppinsTitle', fontWeight: FontWeight.bold, fontSize: 16, color: Colors.grey.shade900),),
               ),
               SizedBox(
                 height: 10,
@@ -257,12 +261,16 @@ class _LastAgendaState extends State<LastAgenda> {
             ],
           ),
         );
+               
+                
+
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+  
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

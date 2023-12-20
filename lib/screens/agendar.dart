@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
 import 'package:projetos/classes/profissionalClass.dart';
@@ -23,10 +24,21 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     // TODO: implement initState
     super.initState();
     LoadUrlImageUserdb();
-
+    loadWhatsNumber();
     Provider.of<CreateUserProvider>(context, listen: false).getImageUser();
+    Provider.of<CreateUserProvider>(context, listen: false).getWhatsNumber();
+
     print('foto passada: ${userUrlImagePhotoLink}');
   }
+  String? whatsNumberCTT;
+  Future<void> loadWhatsNumber() async {
+    String? descUser = await CreateUserProvider().getWhatsNumber();
+
+    setState(() {
+      whatsNumberCTT = descUser;
+    });
+  }
+
 
   int dayView = 1;
   int MonthView = 1;
@@ -199,12 +211,18 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
         );
       }
     }
+    final authSettings = FirebaseAuth.instance;
 
+    final String userId = await authSettings.currentUser!.uid;
     if (!agendamentoExiste) {
       var rng = new Random();
       int number = rng.nextInt(90000) + 10000;
       final provider =
           Provider.of<AgendaProvider>(context, listen: false).agendarCorte(
+            whatsContatoNumber: whatsNumberCTT!,
+        isActive: true,
+        currentUserId: userId,
+        id: Random().nextDouble().toString(),
         ramdomNumber: number,
         username: userName.text,
         imageUser: userUrlImagePhotoLink ?? '',

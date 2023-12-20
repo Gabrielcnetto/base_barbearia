@@ -71,6 +71,8 @@ class CreateUserProvider with ChangeNotifier {
     }
     return null;
   }
+
+
   Future<String?> getNameUser() async {
     if (authSettings.currentUser != null) {
       String? urlImage;
@@ -87,7 +89,22 @@ class CreateUserProvider with ChangeNotifier {
     }
     return null;
   }
-
+Future<String?> getWhatsNumber() async {
+    if (authSettings.currentUser != null) {
+      String? whatsNumber;
+      await dataBaseFirestore
+          .collection("usuarios")
+          .doc(authSettings.currentUser!.uid)
+          .get()
+          .then((getData) {
+        if (getData.exists) {
+          whatsNumber = getData.data()?["PhoneNumber"];
+        } else {}
+      });
+      return whatsNumber;
+    }
+    return null;
+  }
   Future<void> attProfile(String NewUserName) async {
     final userRef = dataBaseFirestore
         .collection("usuarios")
@@ -99,5 +116,7 @@ class CreateUserProvider with ChangeNotifier {
       notifyListeners();
     });
   }
-
+  Future<void>deleteAcc()async{
+    authSettings.currentUser!.delete();
+  }
 }

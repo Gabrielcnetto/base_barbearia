@@ -1,9 +1,10 @@
 class agendaItem {
   //atributos visuais
-
+  final String id;
   final String userName;
-
+  final String currentUserId;
   //responsável
+  final String whatsContatoNumber;
   final String Cabelereiro;
 
   //Horario
@@ -14,10 +15,15 @@ class agendaItem {
   final int month;
   final String imageUser;
   final int year;
+  bool isActive;
   final int ramdomNumber;
 
   agendaItem({
+    required this.currentUserId,
+    required this.whatsContatoNumber,
+    required this.id,
     required this.ramdomNumber,
+    required this.isActive,
     required this.sobrancela,
     required this.userName,
     required this.imageUser,

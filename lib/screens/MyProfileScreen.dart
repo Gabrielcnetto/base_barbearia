@@ -396,7 +396,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       color: Colors.grey.shade200,
                     ),
                   ),
-                  child: LastAgenda(agenda: listaMyCortes[0]),
+                  child: LastAgenda(
+                    agenda: listaMyCortes[0],
+                  ),
                 ),
               ),
             if (listaMyCortes.length < 1)
