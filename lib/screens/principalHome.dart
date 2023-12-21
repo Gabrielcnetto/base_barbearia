@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
+import 'package:projetos/functions/auth/functions/createUser.dart';
 
 import 'package:projetos/screenComponents/home/percentDescont.dart';
 import 'package:projetos/screenComponents/home/profHomeWidget.dart';
+import 'package:projetos/utils/AppRoutes.dart';
 
 import 'package:provider/provider.dart';
 
@@ -21,6 +23,8 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
     Provider.of<GetDataBase>(context, listen: false).getUserName();
     loadUserName();
     loaduserProfileImage();
+    isProffUser;
+    loadTypeUser();
   }
 
   String? userName;
@@ -47,6 +51,20 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
     setState(() {
       urlPhotoImage = UserImageDB;
     });
+  }
+
+  bool? isProffUser;
+  Future<void> loadTypeUser() async {
+    bool? typeisProffUser = await CreateUserProvider().getIsProff();
+    if (typeisProffUser == true) {
+      setState(() {
+        isProffUser = true;
+      });
+    } else {
+      setState(() {
+        isProffUser = false;
+      });
+    }
   }
 
   @override
@@ -136,30 +154,54 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                                 ),
                               ],
                             ),
-                            const Column(
-                              children: [],
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Container(
-                              width: 65,
-                              height: 65,
-                              child: urlPhotoImage != null
-                                  ? ClipRRect(
-                                      child: Image.network(
-                                        urlPhotoImage!,
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.circular(30),
-                                    )
-                                  : ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Image.network(
-                                        'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
-                                        fit: BoxFit.cover,
+                            Row(
+                              children: [
+                                if (isProffUser == true)
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(
+                                              AppRoutes.ValidationTypeUser);
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: Colors.green),
+                                      child: Icon(
+                                        Icons.arrow_back_ios_new,
+                                        color: Colors.white,
+                                        size: 15,
                                       ),
                                     ),
+                                  ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  width: 65,
+                                  height: 65,
+                                  child: urlPhotoImage != null
+                                      ? ClipRRect(
+                                          child: Image.network(
+                                            urlPhotoImage!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                        )
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          child: Image.network(
+                                            'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
