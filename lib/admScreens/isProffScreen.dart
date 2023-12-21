@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:projetos/admScreens/components/radiusCircleTotalHairCut.dart';
 import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
 
+import 'components/proffOptions.dart';
+
 class IsProffScren extends StatefulWidget {
   const IsProffScren({super.key});
 
@@ -102,6 +104,30 @@ class _IsProffScrenState extends State<IsProffScren> {
                 ],
               ),
               TotalCircularHCut(),
+              Container(
+                width: double.infinity,
+                height: 5,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.grey.shade300),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Opções Gerais:',
+                style: TextStyle(
+                  fontFamily: 'PoppinsTitle',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              ProffOptionsComponent(),
             ],
           ),
         ),
