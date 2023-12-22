@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
@@ -58,8 +59,8 @@ class AgendaProvider with ChangeNotifier {
         .doc('dezembro')
         .collection('${day}')
         .add({
-          'id': id,
-          'whatsContatoNumber': whatsContatoNumber,
+      'id': id,
+      'whatsContatoNumber': whatsContatoNumber,
       'imageProfileUser': imageUser,
       'username': username,
       'isActive': isActive,
@@ -115,7 +116,8 @@ class AgendaProvider with ChangeNotifier {
           List<DocumentSnapshot> docs = querySnapshot.docs;
           final int ramdomNumberData = await data['ramdomNumber'];
           _historyList.add(
-            agendaItem(whatsContatoNumber: data['whatsContatoNumber'],
+            agendaItem(
+              whatsContatoNumber: data['whatsContatoNumber'],
               isActive: data['isActive'],
               currentUserId: data['currentUserId'],
               id: data['id'],
@@ -176,5 +178,69 @@ class AgendaProvider with ChangeNotifier {
     }
   }
 
+  //ATUALIZA NA LISTA PRINCIPAL DE CORTES(ACESSO GERAL)
+  Future<void> updateIsActive({
+    required String randomNumber,
+    required String selectedDay,
+  }) async {
+    //INICIO -> faz para a lista geral
+    QuerySnapshot querySnapshot = await dataBaseFirestore
+        .collection("agenda")
+        .doc("dezembro")
+        .collection("22")
+        .get();
 
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+
+    if (docs.isEmpty) {
+      print("Nenhum documento encontrado");
+    } else {
+      for (var doc in docs) {
+        try {
+          // Atualiza o atributo 'isActive' para cada documento
+          doc.reference.update({'isActive': false});
+        } catch (e) {
+          print("Erro ao atualizar o documento: $e");
+        }
+      }
+    }
+    //FIM -> faz para a lista geral
+  }
+
+  //ATUALIZA NA LISTA DE CADA CLIENTE DE CORTES(ACESSO APENAS DO USUARIO)
+  Future<void> setAndMyCortesIsActive() async {
+    //PUXANDO OS UIDS DE TODOS OS USUÁRIOS
+    QuerySnapshot querySnapshot =
+        await dataBaseFirestore.collection("usuarios").get();
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    if (docs.isEmpty) {
+      print("Nenhum documento encontrado");
+    } else {
+      for (var userDoc in docs) {
+        try {
+          //a partir dos id´s coletados, entra em cada 1 e atualiza os atributos na pasta interna
+          QuerySnapshot open = await dataBaseFirestore
+              .collection("meusCortes")
+              .doc(userDoc.id)
+              .collection("lista")
+              .get();
+          List<DocumentSnapshot> openDocs = open.docs;
+          if (openDocs.isEmpty) {
+            print("Nenhum documento encontrado");
+          } else {
+            for (var doc in openDocs) {
+              try {
+                // Atualiza o atributo 'isActive' para cada documento
+                doc.reference.update({'isActive': false});
+              } catch (e) {
+                print("Erro ao atualizar o documento: $e");
+              }
+            }
+          }
+        } catch (e) {
+          print("Erro ao atualizar o documento: $e");
+        }
+      }
+    }
+  }
 }

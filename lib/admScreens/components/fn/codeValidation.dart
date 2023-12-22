@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:provider/provider.dart';
 
 class CodeValidation extends StatefulWidget {
   const CodeValidation({super.key});
@@ -9,12 +13,31 @@ class CodeValidation extends StatefulWidget {
 }
 
 class _CodeValidationState extends State<CodeValidation> {
+  final dataBaseFirestore = FirebaseFirestore.instance;
+  final authSettings = FirebaseAuth.instance;
+
   final finalConfirmCode = TextEditingController();
   final confirm1 = TextEditingController();
   final confirm2 = TextEditingController();
   final confirm3 = TextEditingController();
   final confirm4 = TextEditingController();
   final confirm5 = TextEditingController();
+
+  Future<void> getCodesAndSubmit() async {
+    //INICIO => Concatenando os itens
+    final String finalCode = await (confirm1.text +
+        confirm2.text +
+        confirm3.text +
+        confirm4.text +
+        confirm5.text);
+    //FIM => Concatenando os itens
+    Provider.of<AgendaProvider>(context, listen: false).updateIsActive(
+      randomNumber: finalCode,
+      selectedDay: '22',
+    );
+    Provider.of<AgendaProvider>(context, listen: false)
+        .setAndMyCortesIsActive();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,26 +218,29 @@ class _CodeValidationState extends State<CodeValidation> {
             SizedBox(
               height: 20,
             ),
-            Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 10,
-                decoration: BoxDecoration(
-                  color: Colors.green,
+            InkWell(
+              onTap: getCodesAndSubmit,
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Confirmar',
-                  style: TextStyle(
-                    fontFamily: 'PoppinsTitle',
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 20,
+                child: Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 10,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Confirmar',
+                    style: TextStyle(
+                      fontFamily: 'PoppinsTitle',
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),
