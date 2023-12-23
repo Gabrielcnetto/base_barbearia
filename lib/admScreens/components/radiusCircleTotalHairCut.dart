@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 
 class TotalCircularHCut extends StatefulWidget {
   const TotalCircularHCut({super.key});
@@ -9,6 +10,35 @@ class TotalCircularHCut extends StatefulWidget {
 }
 
 class _TotalCircularHCutState extends State<TotalCircularHCut> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    totalHairCuts;
+    totalClientes;
+    loadTotalClientes();
+
+    getTotalCut();
+  }
+
+  int? totalClientes;
+  Future<void> loadTotalClientes() async {
+    int? clientsServer = await AgendaProvider().totalClientes();
+
+    setState(() {
+      totalClientes = clientsServer;
+    });
+  }
+
+  int? totalHairCuts;
+  Future<void> getTotalCut() async {
+    int? serverCutHair = await AgendaProvider().totalHairFeitos();
+
+    setState(() {
+      totalHairCuts = serverCutHair;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,14 +67,25 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Nível Prata',
-                      style: TextStyle(
-                        fontFamily: 'PoppinsTitle',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+                    if (totalHairCuts! <= 5)
+                      Text(
+                        totalHairCuts == null
+                            ? 'N/A'
+                            : totalHairCuts! <= 5
+                                ? 'Nível Normal'
+                                : totalHairCuts! <= 10
+                                    ? 'Nível Bronze'
+                                    : totalHairCuts! <= 20
+                                        ? 'Nível Prata'
+                                        : totalHairCuts! <= 40
+                                            ? 'Nível Ouro'
+                                            : 'Nível Desconhecido',
+                        style: TextStyle(
+                          fontFamily: 'PoppinsTitle',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
                     Icon(
                       Icons.timeline,
                       color: Colors.grey.shade900.withOpacity(0.5),
@@ -65,25 +106,62 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
               ],
             ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+          Row(
             children: [
-              Text(
-                'Total de Cortes',
-                style: TextStyle(
-                  fontFamily: 'PoppinsTitle',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Expanded(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Total de \n Cortes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'PoppinsTitle',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '${totalHairCuts ?? 0}',
+                        style: TextStyle(
+                            fontFamily: 'PoppinsNormal',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Text(
-                '25',
-                style: TextStyle(
-                    fontFamily: 'PoppinsNormal',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Clientes Cadastrados',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'PoppinsTitle',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '${totalClientes ?? 0}',
+                        style: TextStyle(
+                            fontFamily: 'PoppinsNormal',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:projetos/utils/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
 class CodeValidation extends StatefulWidget {
@@ -35,8 +36,52 @@ class _CodeValidationState extends State<CodeValidation> {
     //   randomNumber: finalCode,
     //   selectedDay: '23',
     // );
-    Provider.of<AgendaProvider>(context, listen: false)
+    await Provider.of<AgendaProvider>(context, listen: false)
         .setAndMyCortesIsActive(finalCode);
+
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            title: Text(
+              'Código Confirmado',
+              style: TextStyle(
+                fontFamily: 'PoppinsTitle',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            content: Text(
+              'Este Corte estava agendado, e foi confirmado',
+              style: TextStyle(
+                fontFamily: 'PoppinsNormal',
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey.shade600,
+              ),
+            ),
+            actions: [
+              ElevatedButton(
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                    Colors.green,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Fechar',
+                  style: TextStyle(
+                    fontFamily: 'PoppinsNormal',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 
   @override

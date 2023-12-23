@@ -96,6 +96,22 @@ class AgendaProvider with ChangeNotifier {
       },
     );
 
+    await dataBaseFirestore.collection("allCuts").add({
+      'id': id,
+      'whatsContatoNumber': whatsContatoNumber,
+      'imageProfileUser': imageUser,
+      'username': username,
+      'isActive': isActive,
+      'cabelereiro': cabelereiro,
+      'FirstComponentHour': FirstComponentHour,
+      'SecondComponentHour': SecondComponentHour,
+      'day': day,
+      'month': month,
+      'year': year,
+      'sobrancelha': sobrancelha,
+      'ramdomNumber': ramdomNumber,
+      'currentUserId': currentUserId,
+    });
     notifyListeners();
   }
 
@@ -250,11 +266,26 @@ class AgendaProvider with ChangeNotifier {
       }
     }
   }
+
+  Future<int?> totalClientes() async {
+    int? totalClientes;
+    //=> Puxando os id´s do usuário
+    QuerySnapshot querySnapshot =
+        await dataBaseFirestore.collection("usuarios").get();
+    //=> Dividindo os dados do firebase em snapshots
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    totalClientes = docs.length;
+    return totalClientes;
+  }
+
+  Future<int?> totalHairFeitos() async {
+    int? totalHairCuts;
+    //=> Puxando os id´s do usuário
+    QuerySnapshot querySnapshot =
+        await dataBaseFirestore.collection("allCuts").get();
+    //=> Dividindo os dados do firebase em snapshots
+    List<DocumentSnapshot> docs = querySnapshot.docs;
+    totalHairCuts = docs.length;
+    return totalHairCuts;
+  }
 }
-    // for (var doc in openDocs) {
-            //   try {
-            //     doc.reference.update({'isActive': false});
-            //   } catch (e) {
-            //     print("Erro ao atualizar o documento: $e");
-            //   }
-            //  }
