@@ -109,33 +109,50 @@ class AgendaProvider with ChangeNotifier {
     } else {
       print('tem itens');
       _historyList.clear();
+
+      // Crie uma lista temporária para armazenar os dados convertidos
+      List<Map<String, dynamic>> tempDataList = [];
+
       for (var doc in docs) {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
         try {
-          List<DocumentSnapshot> docs = querySnapshot.docs;
-          final int ramdomNumberData = await data['ramdomNumber'];
-          _historyList.add(
-            agendaItem(
-              whatsContatoNumber: data['whatsContatoNumber'],
-              isActive: data['isActive'],
-              currentUserId: data['currentUserId'],
-              id: data['id'],
-              ramdomNumber: ramdomNumberData,
-              imageUser: '',
-              sobrancela: data['sobrancelha'],
-              userName: data['username'],
-              Cabelereiro: data['cabelereiro'],
-              FirstComponentHour: data['FirstComponentHour'],
-              SecondComponentHour: data['SecondComponentHour'],
-              day: data['day'],
-              month: data['month'],
-              year: data['year'],
-            ),
-          );
+          // Converter string de data para DateTime
+          String dataComoString =
+              '${data['year']}-${data['month']}-${data['day']}';
+          DateTime dataComoDateTime = DateTime.parse(dataComoString);
+          data['data'] = dataComoDateTime;
+
+          tempDataList.add(data);
         } catch (e) {
           print('algum erro');
         }
+      }
+
+      // Ordenar a lista temporária
+      tempDataList.sort((a, b) => b['data'].compareTo(a['data']));
+
+      // Adicionar itens à _historyList na ordem correta
+      for (var data in tempDataList) {
+        final int ramdomNumberData = await data['ramdomNumber'];
+        _historyList.add(
+          agendaItem(
+            whatsContatoNumber: data['whatsContatoNumber'],
+            isActive: data['isActive'],
+            currentUserId: data['currentUserId'],
+            id: data['id'],
+            ramdomNumber: ramdomNumberData,
+            imageUser: '',
+            sobrancela: data['sobrancelha'],
+            userName: data['username'],
+            Cabelereiro: data['cabelereiro'],
+            FirstComponentHour: data['FirstComponentHour'],
+            SecondComponentHour: data['SecondComponentHour'],
+            day: data['day'],
+            month: data['month'],
+            year: data['year'],
+          ),
+        );
       }
     }
   }
@@ -178,62 +195,52 @@ class AgendaProvider with ChangeNotifier {
     }
   }
 
-  //ATUALIZA NA LISTA PRINCIPAL DE CORTES(ACESSO GERAL)
-  Future<void> updateIsActive({
-    required String randomNumber,
-    required String selectedDay,
-  }) async {
-    //INICIO -> faz para a lista geral
-    QuerySnapshot querySnapshot = await dataBaseFirestore
-        .collection("agenda")
-        .doc("dezembro")
-        .collection("22")
-        .get();
-
-    List<DocumentSnapshot> docs = querySnapshot.docs;
-
-    if (docs.isEmpty) {
-      print("Nenhum documento encontrado");
-    } else {
-      for (var doc in docs) {
-        try {
-          // Atualiza o atributo 'isActive' para cada documento
-          doc.reference.update({'isActive': false});
-        } catch (e) {
-          print("Erro ao atualizar o documento: $e");
-        }
-      }
-    }
-    //FIM -> faz para a lista geral
-  }
-
-  //ATUALIZA NA LISTA DE CADA CLIENTE DE CORTES(ACESSO APENAS DO USUARIO)
-  Future<void> setAndMyCortesIsActive() async {
-    //PUXANDO OS UIDS DE TODOS OS USUÁRIOS
+  Future<void> setAndMyCortesIsActive(String ramdomNumber) async {
+    //=> Puxando os id´s do usuário
     QuerySnapshot querySnapshot =
         await dataBaseFirestore.collection("usuarios").get();
+    //=> Dividindo os dados do firebase em snapshots
     List<DocumentSnapshot> docs = querySnapshot.docs;
     if (docs.isEmpty) {
       print("Nenhum documento encontrado");
     } else {
       for (var userDoc in docs) {
         try {
+          //=> Acessando o item de todos os usuário(histórico)
           //a partir dos id´s coletados, entra em cada 1 e atualiza os atributos na pasta interna
           QuerySnapshot open = await dataBaseFirestore
               .collection("meusCortes")
               .doc(userDoc.id)
               .collection("lista")
               .get();
+
+          //=> Dividindo os dados do firebase em snapshots(histórico)
           List<DocumentSnapshot> openDocs = open.docs;
           if (openDocs.isEmpty) {
-            print("Nenhum documento encontrado");
+            print("Nenhum documento encontrado na lista de cortes");
           } else {
-            for (var doc in openDocs) {
-              try {
-                // Atualiza o atributo 'isActive' para cada documento
-                doc.reference.update({'isActive': false});
-              } catch (e) {
-                print("Erro ao atualizar o documento: $e");
+            for (var itemDoc in openDocs) {
+              print('entrei no for');
+              Map<String, dynamic> data =
+                  itemDoc.data() as Map<String, dynamic>;
+              if (data != null) {
+                print('Data não é nulo');
+                // Convertendo o ramdomNumber para String antes da comparação
+                if (data['ramdomNumber'].toString() == ramdomNumber) {
+                  print('Encontrei o corte correspondente');
+                  // Atualizando o documento no Firestore
+                  await dataBaseFirestore
+                      .collection("meusCortes")
+                      .doc(userDoc.id)
+                      .collection("lista")
+                      .doc(itemDoc.id)
+                      .update({'isActive': false});
+                  print('função de troca bool executada');
+                } else {
+                  print('O ramdomNumber não corresponde');
+                }
+              } else {
+                print('Data é nulo');
               }
             }
           }
@@ -244,3 +251,10 @@ class AgendaProvider with ChangeNotifier {
     }
   }
 }
+    // for (var doc in openDocs) {
+            //   try {
+            //     doc.reference.update({'isActive': false});
+            //   } catch (e) {
+            //     print("Erro ao atualizar o documento: $e");
+            //   }
+            //  }

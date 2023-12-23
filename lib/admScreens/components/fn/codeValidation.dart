@@ -31,12 +31,12 @@ class _CodeValidationState extends State<CodeValidation> {
         confirm4.text +
         confirm5.text);
     //FIM => Concatenando os itens
-    Provider.of<AgendaProvider>(context, listen: false).updateIsActive(
-      randomNumber: finalCode,
-      selectedDay: '22',
-    );
+    // Provider.of<AgendaProvider>(context, listen: false).updateIsActive(
+    //   randomNumber: finalCode,
+    //   selectedDay: '23',
+    // );
     Provider.of<AgendaProvider>(context, listen: false)
-        .setAndMyCortesIsActive();
+        .setAndMyCortesIsActive(finalCode);
   }
 
   @override

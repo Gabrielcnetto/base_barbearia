@@ -17,6 +17,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<AgendaProvider>(
+      context,
+      listen: false,
+    ).HistoryList;
     LoadUrlImageUserdb();
     userName;
   }
@@ -34,9 +38,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<agendaItem> listaMyCortes =
-        Provider.of<AgendaProvider>(context, listen: false).HistoryList;
+    List<agendaItem> listaMyCortes = Provider.of<AgendaProvider>(
+      context,
+    ).HistoryList;
     final int tamanhoLista = listaMyCortes.length;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(
