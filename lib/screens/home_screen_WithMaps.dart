@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       screen = index;
     });
     Provider.of<AgendaProvider>(context, listen: false).loadHistoryCortes();
+    Provider.of<AgendaProvider>(context, listen: false).totalHairFeitos();
   }
 
   @override

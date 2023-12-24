@@ -24,7 +24,7 @@ class _AuthValidationScreeState extends State<AuthValidationScree> {
         if (snpshot.hasData) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Navigator.of(context).pushNamed(
-              AppRoutes.ValidationTypeUser,
+              AppRoutes.HomeScreen,
             );
           });
         } else {

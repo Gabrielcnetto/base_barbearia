@@ -65,7 +65,7 @@ class AlmiranteApp extends StatelessWidget {
           AppRoutes.AuthScreenPrimary: (ctx) => const AuthScreenPrimary(),
           AppRoutes.RegisterScreen: (ctx) => const RegisterScreen(),
           AppRoutes.ScheduleScreen: (ctx) => const ScheduleScreen(),
-          AppRoutes.ValidationTypeUser: (ctx) => const ValidationTypeUser(),
+          AppRoutes.IsProffScren: (ctx) => const IsProffScren(),
         },
       ),
     );

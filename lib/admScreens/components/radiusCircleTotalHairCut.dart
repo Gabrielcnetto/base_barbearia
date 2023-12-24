@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
+import 'package:provider/provider.dart';
 
 class TotalCircularHCut extends StatefulWidget {
   const TotalCircularHCut({super.key});
@@ -14,11 +15,15 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<AgendaProvider>(
+      context,
+    ).totalHairFeitos();
     totalHairCuts;
+    xpLevelUp;
     totalClientes;
     loadTotalClientes();
-
     getTotalCut();
+    setLevel();
   }
 
   int? totalClientes;
@@ -36,6 +41,18 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
 
     setState(() {
       totalHairCuts = serverCutHair;
+    });
+  }
+
+  double? xpLevelUp;
+  Future<void> setLevel() async {
+    int valorinicialLista = totalHairCuts!;
+
+    double xpHairs = await valorinicialLista.toDouble();
+
+    setState(() {
+      xpLevelUp = (xpHairs / 10);
+      print('xp final: ${xpLevelUp}');
     });
   }
 
@@ -98,7 +115,7 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
                   width: 150,
                   child: CircularProgressIndicator(
                     value:
-                        0.4, // Altere este valor para representar o progresso
+                        xpLevelUp, // Altere este valor para representar o progresso
                     color: Colors.green,
                     strokeWidth: 15,
                   ),

@@ -159,9 +159,9 @@ class _PrincipalHomeScreenState extends State<PrincipalHomeScreen> {
                                 if (isProffUser == true)
                                   InkWell(
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .pushReplacementNamed(
-                                              AppRoutes.ValidationTypeUser);
+                                      Navigator.of(context).pushNamed(
+                                        AppRoutes.IsProffScren,
+                                      );
                                     },
                                     child: Container(
                                       alignment: Alignment.center,
