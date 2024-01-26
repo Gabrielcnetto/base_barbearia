@@ -135,18 +135,21 @@ class AgendaProvider with ChangeNotifier {
         try {
           // Converter string de data para DateTime
           String dataComoString =
-              '${data['year']}-${data['month']}-${data['day']}';
-          DateTime dataComoDateTime = DateTime.parse(dataComoString);
-          data['data'] = dataComoDateTime;
+              '${data['year'].toString().padLeft(4, '0')}-${data['month'].toString().padLeft(2, '0')}-${data['day'].toString().padLeft(2, '0')}';
 
           tempDataList.add(data);
         } catch (e) {
-          print('algum erro');
+          print('algum erro:${e}');
         }
       }
 
       // Ordenar a lista temporária
-      tempDataList.sort((a, b) => b['data'].compareTo(a['data']));
+      try {
+        tempDataList.sort((a, b) => b['day'].compareTo(a['day']));
+      } catch (e) {
+        print('erro no sort ${e}');
+        
+      }
 
       // Adicionar itens à _historyList na ordem correta
       for (var data in tempDataList) {

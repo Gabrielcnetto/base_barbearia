@@ -8,6 +8,7 @@ import 'package:projetos/functions/auth/auth_validation/auth_validationScree.dar
 import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/functions/auth/login/screens/auth_ScreenLogin.dart';
 import 'package:projetos/functions/auth/register/screens/register_screen.dart';
+import 'package:projetos/functions/newEventSchedule/newEventScheduleFN.dart';
 import 'package:projetos/screens/home_screen_WithMaps.dart';
 import 'package:projetos/admScreens/isProffScreen.dart';
 import 'package:projetos/screens/scheduleScreen.dart';
@@ -15,17 +16,17 @@ import 'package:projetos/screens/validationTypeUser.dart';
 import 'package:projetos/utils/AppRoutes.dart';
 import 'package:provider/provider.dart';
 
-//void main() async {
-//  WidgetsFlutterBinding.ensureInitialized();
-//  await Firebase.initializeApp();
-//  runApp(
-//    DevicePreview(
-//      enabled: !kReleaseMode,
+// void main() async {
+// WidgetsFlutterBinding.ensureInitialized();
+// await Firebase.initializeApp();
+// runApp(
+//   DevicePreview(
+//    //      enabled: !kReleaseMode,
 //      // ignore: prefer_const_constructors
 //      builder: (context) => AlmiranteApp(), // Wrap your app
-//    ),
-//  );
-// }
+//   ),
+// );
+//}
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -49,6 +50,9 @@ class AlmiranteApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => AgendaProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => newEventInSchedule(),
         ),
       ],
       child: MaterialApp(

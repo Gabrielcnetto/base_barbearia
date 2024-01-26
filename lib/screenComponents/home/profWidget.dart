@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/profissionalClass.dart';
 
-class ProfWdiget extends StatelessWidget {
+class ProfWdiget extends StatefulWidget {
   final ProfissionalClass profInfs;
   const ProfWdiget({
     super.key,
@@ -9,20 +9,29 @@ class ProfWdiget extends StatelessWidget {
   });
 
   @override
+  State<ProfWdiget> createState() => _ProfWdigetState();
+}
+
+class _ProfWdigetState extends State<ProfWdiget> {
+
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 5),
       child: Container(
+        padding: EdgeInsets.all(5),
+        
         child: Column(
           children: [
             Container(
               alignment: Alignment.center,
               child: Container(
-                width: 110,
-                height: 110,
+                width: 100,
+                height: 100,
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(
-                    profInfs.urlPhoto,
+                    widget.profInfs.urlPhoto,
                   ),
                   maxRadius: 40,
                 ),
@@ -35,7 +44,7 @@ class ProfWdiget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  profInfs.name,
+                  widget.profInfs.name,
                   style: const TextStyle(
                     fontFamily: 'PoppinsNormal',
                     fontSize: 14,
@@ -43,7 +52,7 @@ class ProfWdiget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  profInfs.topCut,
+                  widget.profInfs.topCut,
                   style: const TextStyle(
                     fontFamily: 'PoppinsTitle',
                     fontWeight: FontWeight.bold,
@@ -68,7 +77,7 @@ class ProfWdiget extends StatelessWidget {
                         size: 20,
                       ),
                       Text(
-                        ' R\$${profInfs.valueCut.toStringAsFixed(0)} ',
+                        ' R\$${widget.profInfs.valueCut.toStringAsFixed(0)} ',
                         style: const TextStyle(
                             fontFamily: 'PoppinsNormal',
                             fontWeight: FontWeight.bold,

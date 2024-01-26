@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
+import 'package:projetos/functions/DataBaseInfs/getDataBase.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/screenComponents/perfil/lastAgend.dart';
@@ -17,6 +18,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    loaduserProfileImage();
     Provider.of<AgendaProvider>(
       context,
       listen: false,
@@ -33,6 +35,19 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
     setState(() {
       userName = descUser;
+    });
+  }
+
+  String? urlPhotoImage;
+  Future<void> loaduserProfileImage() async {
+    String? UserImageDB = await GetDataBase().getUrlImage();
+
+    if (urlPhotoImage != null) {
+    } else {
+      const Text('N/A');
+    }
+    setState(() {
+      urlPhotoImage = UserImageDB;
     });
   }
 
@@ -74,25 +89,26 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 children: [
                   Container(
                     width: 100,
-                    height: 110,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        width: 0.6,
-                        color: Colors.grey.shade600,
-                      ),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        'https://th.bing.com/th/id/OIP.awAiMS1BCAQ2xS2lcdXGlwHaHH?rs=1&pid=ImgDetMain',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    height: 100,
+                    child: urlPhotoImage != null
+                        ? ClipRRect(
+                            child: Image.network(
+                              urlPhotoImage!,
+                              fit: BoxFit.cover,
+                            ),
+                            borderRadius: BorderRadius.circular(30),
+                          )
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image.network(
+                              'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                   ),
                   Container(
                     alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width / 1.7,
+                   // width: MediaQuery.of(context).size.width / 1.7,
                     height: MediaQuery.of(context).size.height / 5,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

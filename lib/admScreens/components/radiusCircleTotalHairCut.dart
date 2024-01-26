@@ -15,9 +15,6 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<AgendaProvider>(
-      context,
-    ).totalHairFeitos();
     totalHairCuts;
     xpLevelUp;
     totalClientes;
@@ -35,26 +32,28 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
     });
   }
 
-  int? totalHairCuts;
+  int totalHairCuts = 0;
   Future<void> getTotalCut() async {
     int? serverCutHair = await AgendaProvider().totalHairFeitos();
 
     setState(() {
-      totalHairCuts = serverCutHair;
+      totalHairCuts = serverCutHair ?? 0;
+      setLevel();
     });
   }
 
-  double? xpLevelUp;
-  Future<void> setLevel() async {
-    int valorinicialLista = totalHairCuts!;
+double xpLevelUp = 0;
 
-    double xpHairs = await valorinicialLista.toDouble();
+Future<void> setLevel() async {
+  int valorinicialLista = totalHairCuts;
 
-    setState(() {
-      xpLevelUp = (xpHairs / 10);
-      print('xp final: ${xpLevelUp}');
-    });
-  }
+  double xpHairs = await valorinicialLista.toDouble();
+
+  setState(() {
+    xpLevelUp = (xpHairs % 10) / 10; // isso será um número entre 0.0 e 0.9
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,25 +83,24 @@ class _TotalCircularHCutState extends State<TotalCircularHCut> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (totalHairCuts! <= 5)
-                      Text(
-                        totalHairCuts == null
-                            ? 'N/A'
-                            : totalHairCuts! <= 5
-                                ? 'Nível Normal'
-                                : totalHairCuts! <= 10
-                                    ? 'Nível Bronze'
-                                    : totalHairCuts! <= 20
-                                        ? 'Nível Prata'
-                                        : totalHairCuts! <= 40
-                                            ? 'Nível Ouro'
-                                            : 'Nível Desconhecido',
-                        style: TextStyle(
-                          fontFamily: 'PoppinsTitle',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
+                    Text(
+                      totalHairCuts == null
+                          ? 'N/A'
+                          : totalHairCuts <= 10
+                              ? 'Nível Normal'
+                              : totalHairCuts <= 20 && totalHairCuts > 10
+                                  ? 'Nível Bronze'
+                                  : totalHairCuts <= 30
+                                      ? 'Nível Prata'
+                                      : totalHairCuts <= 40
+                                          ? 'Nível Ouro'
+                                          : 'Nível Desconhecido',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
                       ),
+                    ),
                     Icon(
                       Icons.timeline,
                       color: Colors.grey.shade900.withOpacity(0.5),

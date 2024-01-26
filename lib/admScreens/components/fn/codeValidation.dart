@@ -14,6 +14,10 @@ class CodeValidation extends StatefulWidget {
 }
 
 class _CodeValidationState extends State<CodeValidation> {
+  FocusNode field2FocusNode = FocusNode();
+  FocusNode field3FocusNode = FocusNode();
+  FocusNode field4FocusNode = FocusNode();
+  FocusNode field5FocusNode = FocusNode();
   final dataBaseFirestore = FirebaseFirestore.instance;
   final authSettings = FirebaseAuth.instance;
 
@@ -150,6 +154,11 @@ class _CodeValidationState extends State<CodeValidation> {
                     width: 60,
                     height: 60,
                     child: TextFormField(
+                      onFieldSubmitted: (term) {
+                        FocusScope.of(context).requestFocus(field2FocusNode);
+                      },
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
                       controller: confirm1,
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
@@ -157,6 +166,7 @@ class _CodeValidationState extends State<CodeValidation> {
                       ),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                       ),
                     ),
@@ -174,6 +184,12 @@ class _CodeValidationState extends State<CodeValidation> {
                     width: 60,
                     height: 60,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      focusNode: field2FocusNode,
+                      onFieldSubmitted: (term) {
+                        FocusScope.of(context).requestFocus(field3FocusNode);
+                      },
                       controller: confirm2,
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
@@ -181,6 +197,7 @@ class _CodeValidationState extends State<CodeValidation> {
                       ),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                       ),
                     ),
@@ -198,13 +215,20 @@ class _CodeValidationState extends State<CodeValidation> {
                     width: 60,
                     height: 60,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
                       controller: confirm3,
+                      onFieldSubmitted: (term) {
+                        FocusScope.of(context).requestFocus(field4FocusNode);
+                      },
+                      focusNode: field3FocusNode,
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                       ),
                     ),
@@ -222,13 +246,20 @@ class _CodeValidationState extends State<CodeValidation> {
                     width: 60,
                     height: 60,
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: confirm4,
+                      onFieldSubmitted: (term) {
+                        FocusScope.of(context).requestFocus(field5FocusNode);
+                      },
+                      focusNode: field4FocusNode,
+                      maxLength: 1,
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                       ),
                     ),
@@ -246,13 +277,20 @@ class _CodeValidationState extends State<CodeValidation> {
                     width: 60,
                     height: 60,
                     child: TextFormField(
+                      onFieldSubmitted: (term) {
+                        getCodesAndSubmit();
+                      },
+                      focusNode: field5FocusNode,
+                      keyboardType: TextInputType.number,
                       controller: confirm5,
+                      maxLength: 1,
                       style: TextStyle(
                         fontFamily: 'PoppinsTitle',
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
+                        counterText: '',
                         border: InputBorder.none,
                       ),
                     ),

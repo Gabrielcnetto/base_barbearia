@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projetos/classes/agendaClass.dart';
@@ -7,9 +6,8 @@ import 'package:projetos/classes/profissionalClass.dart';
 import 'package:projetos/functions/agendaProvider/agendaProvider.dart';
 import 'package:projetos/functions/auth/functions/createUser.dart';
 import 'package:projetos/lists/ProfissionalList.dart';
-
 import 'package:provider/provider.dart';
-
+import 'package:googleapis_auth/auth_io.dart';
 class AgendarFunctionScreen extends StatefulWidget {
   const AgendarFunctionScreen({super.key});
 
@@ -131,7 +129,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
     for (var item in lista) {
       if (item.day == dayView &&
           item.FirstComponentHour == hourView &&
-          item.month == 12 &&
+          item.month == 1 &&
           item.Cabelereiro == selectBarber()) {
         // Mostrar uma mensagem para o usuário
 
@@ -231,8 +229,8 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
         FirstComponentHour: hourView,
         SecondComponentHour: minutesView,
         day: dayView,
-        month: 12,
-        year: 2023,
+        month: 1,
+        year: 2024,
       );
     }
 
@@ -476,7 +474,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
                                             ),
                                           ),
                                           Text(
-                                            '/12',
+                                            '/1',
                                             style: TextStyle(
                                               color: Colors.grey.shade900,
                                               fontSize: 40,
