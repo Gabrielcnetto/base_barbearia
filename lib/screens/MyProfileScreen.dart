@@ -59,384 +59,322 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     final int tamanhoLista = listaMyCortes.length;
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 10,
-          right: 15,
-          left: 15,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              'Meu Perfil',
-              style: TextStyle(
-                  fontFamily: 'PoppinsTitle',
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey.shade900),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height / 4,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.grey.shade200,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        color: Colors.grey.shade100,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 100,
-                    height: 100,
-                    child: urlPhotoImage != null
-                        ? ClipRRect(
-                            child: Image.network(
-                              urlPhotoImage!,
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(30),
-                          )
-                        : ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: Image.network(
-                              'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                   // width: MediaQuery.of(context).size.width / 1.7,
-                    height: MediaQuery.of(context).size.height / 5,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Pontos',
-                                style: TextStyle(
-                                    fontFamily: 'PoppinsTitle',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              Text(
-                                '${tamanhoLista}p',
-                                style: const TextStyle(
-                                  fontFamily: 'PoppinsNormal',
-                                  fontSize: 13,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Cortes',
-                                style: TextStyle(
-                                    fontFamily: 'PoppinsTitle',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              Text(
-                                '${tamanhoLista}',
-                                style: const TextStyle(
-                                  fontFamily: 'PoppinsNormal',
-                                  fontSize: 13,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Nível',
-                                style: TextStyle(
-                                    fontFamily: 'PoppinsTitle',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
-                              ),
-                              if (tamanhoLista <= 5)
-                                const Text(
-                                  'Iniciante',
-                                  style: TextStyle(
-                                    fontFamily: 'PoppinsNormal',
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              if (tamanhoLista > 5 && tamanhoLista < 8)
-                                const Text(
-                                  'Secundário',
-                                  style: TextStyle(
-                                    fontFamily: 'PoppinsNormal',
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              if (tamanhoLista >= 9)
-                                const Text(
-                                  'Vip',
-                                  style: TextStyle(
-                                    fontFamily: 'PoppinsNormal',
-                                    fontSize: 13,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ],
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      border: Border.all(width: 5, color: Colors.white),
+                    ),
+                    width: 120,
+                    height: 120,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: Image.network(urlPhotoImage ??
+                          'https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg'),
                     ),
                   ),
+                  Text(
+                    '${userName ?? ''}',
+                    style: TextStyle(
+                      fontFamily: 'PoppinsTitle',
+                      fontSize: 20,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.offline_bolt,
+                        color: Colors.blue,
+                        size: 25,
+                      ),
+                      SizedBox(
+                        width: 2,
+                      ),
+                      Text(
+                        'Cliente Iniciante',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: 'PoppinsTitle',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
-            ),
-            Text(
-              userName ?? 'Null',
-              style: const TextStyle(
-                fontFamily: 'PoppinsTitle',
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+            child: Column(
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 5,
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                            context: context,
-                            builder: (ctx) {
-                              return Container(
-                                padding: const EdgeInsets.only(
-                                    top: 20, left: 10, right: 10),
-                                width: double.infinity,
-                                height: MediaQuery.of(context).size.height / 2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Atualize seu Nome',
-                                      style: TextStyle(
-                                        fontFamily: 'PoppinsTitle',
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          bottomLeft: Radius.elliptical(10, 10),
-                                          bottomRight:
-                                              Radius.elliptical(10, 10),
-                                          topLeft: Radius.elliptical(10, 10),
-                                          topRight: Radius.elliptical(10, 10),
-                                        ),
-                                        border: Border.all(
-                                          width: 0.5,
-                                          color: Colors.grey.shade900,
-                                        ),
-                                      ),
-                                      width: double.infinity,
-                                      child: TextFormField(
-                                        controller: newName,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          label: Text(
-                                            'Digite...',
-                                            style: TextStyle(
-                                              fontFamily: 'PoppinsNormal',
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.grey.shade900
-                                                  .withOpacity(0.5),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 25,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        Provider.of<CreateUserProvider>(context,
-                                                listen: false)
-                                            .attProfile(
-                                          newName.text,
-                                        );
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: double.infinity,
-                                        height: 40,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.elliptical(5, 5),
-                                            bottomRight:
-                                                Radius.elliptical(5, 5),
-                                            topLeft: Radius.elliptical(5, 5),
-                                            topRight: Radius.elliptical(5, 5),
-                                          ),
-                                          color: Colors.green,
-                                        ),
-                                        child: const Text(
-                                          'Atualizar Nome',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'PoppinsTitle',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            });
-                      },
-                      child: Container(
-                        height: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade800,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Text(
-                          'Editar Perfil',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'PoppinsNormal',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Telefone:',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.grey.shade800,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
+                    Text(
+                      '(51) 9 8344-8088',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: InkWell(
-                      onTap: () {
-                        Provider.of<CreateUserProvider>(context, listen: false)
-                            .logoutUser();
-                      },
-                      child: Container(
-                        height: 40,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Colors.grey.shade800,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Text(
-                          'Sair da Conta',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'PoppinsNormal',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                //segunda inf
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'E-mail:',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.grey.shade800,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
+                    Text(
+                      'emanuel@gmail.com',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                //terceira
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Altere seu Nome:',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.grey.shade800,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      'Clique Para Editar',
+                      style: TextStyle(
+                        fontFamily: 'PoppinsTitle',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: 5,
-              width: double.infinity,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Container(
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey.withOpacity(0.3),
+                  top: BorderSide(color: Colors.grey.shade700.withOpacity(0.2)),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height / 4.5,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Pontuação Atual',
+                                style: TextStyle(
+                                  fontFamily: 'PoppinsTitle',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '${Provider.of<AgendaProvider>(context, listen: false).HistoryList.length}p',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.white,
+                                      fontFamily: 'PoppinsNormal',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade300,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  ),
+                                ),
+                                height: 40,
+                                child: Text(
+                                  'Complete as Missões',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'PoppinsTitle',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      //segundo container
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height / 4.5,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Gasto na Barbearia',
+                                style: TextStyle(
+                                  fontFamily: 'PoppinsTitle',
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'R\$${(Provider.of<AgendaProvider>(context, listen: false).HistoryList.length) * (15)}',
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                        fontFamily: 'PoppinsNormal'),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                width: 320,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade300,
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10),
+                                  ),
+                                ),
+                                height: 40,
+                                child: Text(
+                                  'Confira o Histórico',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'PoppinsTitle',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Seu Último Agendamento',
-              style: TextStyle(
-                fontFamily: 'PoppinsNormal',
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+          ),
+          if (listaMyCortes.length >= 1)
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            if (listaMyCortes.length >= 1)
-              Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
+              child: Container(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 5,
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.grey.shade200,
+                  ),
                 ),
-                child: Container(
-                  width: double.infinity,
-                  height: MediaQuery.of(context).size.height / 5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.grey.shade200,
-                    ),
-                  ),
-                  child: LastAgenda(
-                    agenda: listaMyCortes[0],
-                  ),
+                child: LastAgenda(
+                  agenda: listaMyCortes[0],
                 ),
               ),
-            if (listaMyCortes.length < 1)
-              Center(
-                child: Text(
-                  'Você não tem agendamentos ativos.',
-                  style: TextStyle(
-                    fontFamily: 'PoppinsTitle',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.grey.shade900.withOpacity(0.7),
-                  ),
+            ),
+          if (listaMyCortes.length < 1)
+            Center(
+              child: Text(
+                'Você não tem agendamentos ativos.',
+                style: TextStyle(
+                  fontFamily: 'PoppinsTitle',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.grey.shade900.withOpacity(0.7),
                 ),
-              )
-          ],
-        ),
+              ),
+            )
+        ],
       ),
     );
   }
