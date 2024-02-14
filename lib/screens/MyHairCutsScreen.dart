@@ -59,78 +59,7 @@ class _MyHairCutScreenState extends State<MyHairCutScreen> {
                       ),
                     ],
                   ),
-                  Container(
-                    child: Column(
-                      children: [
-                        if (myCortes.length <= 5)
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Icon(
-                              Icons.trip_origin_sharp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        if (myCortes.length > 5 && myCortes.length < 8)
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Colors.orangeAccent,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Icon(
-                              Icons.trip_origin_sharp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        if (myCortes.length >= 9)
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Icon(
-                              Icons.trip_origin_sharp,
-                              color: Colors.white,
-                            ),
-                          ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        if (myCortes.length <= 5)
-                          Text(
-                            'Iniciante',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontFamily: 'PoppinsTitle',
-                              fontSize: 13,
-                            ),
-                          ),
-                        if (myCortes.length > 5 && myCortes.length < 8)
-                          Text(
-                            'Secundário',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontFamily: 'PoppinsTitle',
-                              fontSize: 13,
-                            ),
-                          ),
-                        if (myCortes.length >= 9)
-                          Text(
-                            'Vip',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.7),
-                              fontFamily: 'PoppinsTitle',
-                              fontSize: 13,
-                            ),
-                          ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                  ),
+                  
                 ],
               ),
               const SizedBox(

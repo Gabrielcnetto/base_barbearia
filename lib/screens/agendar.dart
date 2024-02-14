@@ -234,7 +234,7 @@ class _AgendarFunctionScreenState extends State<AgendarFunctionScreen> {
       );
     }
 
-    print('tamanho atual da lista: ${lista.length}');
+ 
   }
 
   bool BarberSelectedCleber = false;

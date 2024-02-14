@@ -47,4 +47,45 @@ class GetDataBase with ChangeNotifier {
     }
     return null;
   }
+
+  //email
+    Future<String?> getEmail() async {
+    if (authSettings.currentUser != null) {
+      final String uidUser = await authSettings.currentUser!.uid;
+      String? userEmail;
+
+      await db.collection("usuarios").doc(uidUser).get().then((event) {
+        if (event.exists) {
+          Map<String, dynamic> data = event.data() as Map<String, dynamic>;
+
+          userEmail = data['userEmail'];
+        } else {
+        
+        }
+        return userEmail;
+      });
+      return userEmail;
+    }
+    return null;
+  }
+  //telefone
+      Future<String?> getWhatsNumber() async {
+    if (authSettings.currentUser != null) {
+      final String uidUser = await authSettings.currentUser!.uid;
+      String? numberWhats;
+
+      await db.collection("usuarios").doc(uidUser).get().then((event) {
+        if (event.exists) {
+          Map<String, dynamic> data = event.data() as Map<String, dynamic>;
+
+          numberWhats = data['PhoneNumber'];
+        } else {
+        
+        }
+        return numberWhats;
+      });
+      return numberWhats;
+    }
+    return null;
+  }
 }
